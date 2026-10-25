@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Zennx Downloader",
-  "version": "1.8.67",
-  "identifier": "com.zennx.downloader",
+  "productName": "Skyc Downloader",
+  "version": "1.6.7",
+  "identifier": "com.skyc.downloader",
   "build": {
     "frontendDist": "../public"
   },
@@ -10,7 +10,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "Zennx Downloader — Media Suite",
+        "title": "Skyc Downloader — Media Suite",
         "width": 1024,
         "height": 720,
         "minWidth": 460,

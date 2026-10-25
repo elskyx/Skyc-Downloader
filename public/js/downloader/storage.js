@@ -12,7 +12,7 @@ import { showToast } from "../utils/index.js";
 export async function downloadAndSaveMediaStream({
   url,
   filename,
-  subfolder = "Movies/Zennx",
+  subfolder = "Movies/Skyc",
   mimeType = "video/mp4",
   onProgress = () => {},
 }) {
@@ -26,7 +26,7 @@ export async function downloadAndSaveMediaStream({
 
       // Listen for chunk-by-chunk real-time progress events from Rust
       if (window.__TAURI__?.event?.listen) {
-        unlisten = await window.__TAURI__.event.listen("zennx://download-progress", (event) => {
+        unlisten = await window.__TAURI__.event.listen("skyc://download-progress", (event) => {
           const payload = event.payload;
           if (payload && payload.filename === filename) {
             if (payload.total && payload.total > 0) {
@@ -54,12 +54,12 @@ export async function downloadAndSaveMediaStream({
       return { success: true, path: savedPath, fileSize };
     } catch (tauriErr) {
       if (unlisten) unlisten();
-      console.warn("[Zennx Storage] Tauri native stream failed, attempting memory fallback:", tauriErr);
+      console.warn("[Skyc Storage] Tauri native stream failed, attempting memory fallback:", tauriErr);
     }
   }
 
   // 2. Android Native Bridge Streaming (OkHttp -> Public Media File)
-  const nativeHttp = window.ZennxNativeHttp || window.SkycNativeHttp;
+  const nativeHttp = window.SkycNativeHttp || window.SkycNativeHttp;
   if (nativeHttp?.downloadFileNative) {
     try {
       onProgress(15, "Connecting Android native stream...");
@@ -70,9 +70,9 @@ export async function downloadAndSaveMediaStream({
         onProgress(100, "Saved to device");
         return { success: true, path: res.path };
       }
-      console.warn("[Zennx Storage] Android native download returned non-success:", res?.error);
+      console.warn("[Skyc Storage] Android native download returned non-success:", res?.error);
     } catch (androidErr) {
-      console.warn("[Zennx Storage] Android native download exception:", androidErr);
+      console.warn("[Skyc Storage] Android native download exception:", androidErr);
     }
   }
 
@@ -116,7 +116,7 @@ export async function downloadAndSaveMediaStream({
 export async function saveMediaFile({
   data,
   filename,
-  subfolder = "Movies/Zennx",
+  subfolder = "Movies/Skyc",
   mimeType = "video/mp4",
   onProgress = () => {},
 }) {

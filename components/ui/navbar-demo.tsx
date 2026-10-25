@@ -44,15 +44,15 @@ export default function NavbarDemo() {
                   >
                     <path
                       d="M4 12L20 12"
-                      className="origin-center -translate-y-[7px] transition-transform duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[315deg]"
+                      className="origin-center -translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[315deg]"
                     />
                     <path
                       d="M4 12H20"
-                      className="origin-center transition-transform duration-300 ease-[cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45"
+                      className="origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45"
                     />
                     <path
                       d="M4 12H20"
-                      className="origin-center translate-y-[7px] transition-transform duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[135deg]"
+                      className="origin-center translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[135deg]"
                     />
                   </svg>
                 </Button>
@@ -77,8 +77,8 @@ export default function NavbarDemo() {
           </div>
           {/* Main nav */}
           <div className="flex items-center gap-6">
-            <a href="/" aria-label="Zennx Homepage" className="text-primary hover:text-primary/90 font-bold text-lg">
-              <h2>Zennx</h2>
+            <a href="#" className="text-primary hover:text-primary/90 font-bold text-lg">
+              <h2>Skyc</h2>
             </a>
             {/* Navigation menu - removed h-full classes and simplified styling */}
             <NavigationMenu className="max-md:hidden">
@@ -100,7 +100,7 @@ export default function NavbarDemo() {
         {/* Right side */}
         <div className="flex items-center gap-2">
           <Button asChild variant="ghost" size="sm" className="text-sm">
-            <a href="https://github.com/elskyx/Zennx" target="_blank" rel="noopener">Sign In</a>
+            <a href="https://github.com/elskyx/Skyc" target="_blank" rel="noopener">Sign In</a>
           </Button>
           <Button asChild size="sm" className="text-sm">
             <a href="#downloads">Get Started</a>

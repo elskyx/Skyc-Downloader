@@ -9,7 +9,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 6
-        versionName "1.8.67"
+        versionName "1.6.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

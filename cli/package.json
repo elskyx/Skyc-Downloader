@@ -1,10 +1,9 @@
 {
-  "name": "@elskyx/zennx",
-  "version": "1.8.67",
-  "description": "Zennx Downloader — Universal client-side media downloader CLI. Save anything, from anywhere. No watermarks. No tracking.",
+  "name": "@elskyx/skyc",
+  "version": "1.6.7",
+  "description": "Skyc Downloader — Universal client-side media downloader CLI. Save anything, from anywhere. No watermarks. No tracking.",
   "type": "module",
   "bin": {
-    "zennx": "index.js",
     "skyc": "index.js"
   },
   "main": "index.js",
@@ -23,7 +22,7 @@
   "license": "GPL-3.0-or-later",
   "repository": {
     "type": "git",
-    "url": "https://github.com/elskyx/Zennx-Downloader.git"
+    "url": "https://github.com/elskyx/Skyc-Downloader.git"
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0",

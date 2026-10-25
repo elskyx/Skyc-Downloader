@@ -1,11 +1,11 @@
 # Skyc Downloader — Design System Master File
 
-> **LOGIC:** When styling or extending a specific page or component, follow the rules defined here as the single source of truth for **Skyc Downloader** (v1.8.67).
+> **LOGIC:** When styling or extending a specific page or component, follow the rules defined here as the single source of truth for **Skyc Downloader** (v1.6.7).
 
 ---
 
 **Project:** Skyc Downloader (elskyx/Skyc)  
-**Version:** v1.8.67  
+**Version:** v1.6.7  
 **Design Philosophy:** Claude-Inspired Warm Minimalism, 21st.dev Design-Engineering Craft, Zero-Cloud Privacy, Anti-Slop Studio Quality.  
 **Platform Targets:** Responsive Web, Tauri Desktop (Windows x64), Capacitor Mobile (Android APK).
 
@@ -58,7 +58,7 @@ The design system employs a dual-theme surface system: **Warm Parchment** for Li
 - **UI Sans:** `Plus Jakarta Sans`, system-ui, sans-serif  
   *Usage:* Navigation, button labels, modal headers, body copy.
 - **Monospace:** `JetBrains Mono`, monospace  
-  *Usage:* Version tags (`v1.8.67`), scraper IDs, URL tokens, file size metrics, hashes.
+  *Usage:* Version tags (`v1.6.7`), scraper IDs, URL tokens, file size metrics, hashes.
 
 ---
 

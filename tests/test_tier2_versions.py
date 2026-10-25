@@ -23,14 +23,14 @@ import unittest
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-TARGET_VERSION = "1.8.67"
-TARGET_TAG = "v1.8.67"
+TARGET_VERSION = "1.6.7"
+TARGET_TAG = "v1.6.7"
 
 class TestTier2Versions(unittest.TestCase):
-    """Verifies that every project component declares target version 1.8.67 / v1.8.67."""
+    """Verifies that every project component declares target version 1.6.7 / v1.6.7."""
 
     def test_01_root_package_json(self):
-        """Verifies root package.json specifies version 1.7.67."""
+        """Verifies root package.json specifies version 1.6.7."""
         path = PROJECT_ROOT / "package.json"
         self.assertTrue(path.exists(), f"Missing {path}")
         with open(path, "r", encoding="utf-8") as f:
@@ -127,13 +127,13 @@ class TestTier2Versions(unittest.TestCase):
         self.assertIn(f"v{TARGET_VERSION}", content, f"landing/index.html does not contain 'v{TARGET_VERSION}'")
 
         # Download filenames
-        self.assertIn(f"Zennx-v{TARGET_VERSION}.apk", content,
-                      f"landing/index.html missing download link for Zennx-v{TARGET_VERSION}.apk")
-        self.assertIn(f"Zennx_{TARGET_VERSION}_x64-setup.exe", content,
-                      f"landing/index.html missing download link for Zennx_{TARGET_VERSION}_x64-setup.exe")
+        self.assertIn(f"Skyc-v{TARGET_VERSION}.apk", content,
+                      f"landing/index.html missing download link for Skyc-v{TARGET_VERSION}.apk")
+        self.assertIn(f"Skyc_{TARGET_VERSION}_x64-setup.exe", content,
+                      f"landing/index.html missing download link for Skyc_{TARGET_VERSION}_x64-setup.exe")
 
     def test_09_landing_script_js(self):
-        """Verifies landing/script.js defines currentVersion = '1.7.67'."""
+        """Verifies landing/script.js defines currentVersion = '1.6.7'."""
         path = PROJECT_ROOT / "landing" / "script.js"
         self.assertTrue(path.exists(), f"Missing {path}")
         content = path.read_text(encoding="utf-8")
@@ -143,7 +143,7 @@ class TestTier2Versions(unittest.TestCase):
                          f"landing/script.js currentVersion is '{match.group(1)}', expected '{TARGET_VERSION}'")
 
     def test_10_components_ui(self):
-        """Verifies components/ui/demo.tsx and components/ui/navigation-menu-4.tsx reflect v1.7.67."""
+        """Verifies components/ui/demo.tsx and components/ui/navigation-menu-4.tsx reflect v1.6.7."""
         demo_path = PROJECT_ROOT / "components" / "ui" / "demo.tsx"
         self.assertTrue(demo_path.exists(), f"Missing {demo_path}")
         demo_content = demo_path.read_text(encoding="utf-8")
@@ -157,16 +157,16 @@ class TestTier2Versions(unittest.TestCase):
                       f"components/ui/navigation-menu-4.tsx does not contain 'v{TARGET_VERSION}'")
 
     def test_11_readme_md(self):
-        """Verifies README.md version badge and download tables specify v1.7.67."""
+        """Verifies README.md version badge and download tables specify v1.6.7."""
         path = PROJECT_ROOT / "README.md"
         self.assertTrue(path.exists(), f"Missing {path}")
         content = path.read_text(encoding="utf-8")
         self.assertIn(f"Version-v{TARGET_VERSION}", content,
                       f"README.md does not contain Version-v{TARGET_VERSION} badge")
-        self.assertIn(f"Zennx-v{TARGET_VERSION}.apk", content,
-                      f"README.md does not contain Zennx-v{TARGET_VERSION}.apk")
-        self.assertIn(f"Zennx_{TARGET_VERSION}_x64-setup.exe", content,
-                      f"README.md does not contain Zennx_{TARGET_VERSION}_x64-setup.exe")
+        self.assertIn(f"Skyc-v{TARGET_VERSION}.apk", content,
+                      f"README.md does not contain Skyc-v{TARGET_VERSION}.apk")
+        self.assertIn(f"Skyc_{TARGET_VERSION}_x64-setup.exe", content,
+                      f"README.md does not contain Skyc_{TARGET_VERSION}_x64-setup.exe")
 
     def test_12_android_build_gradle(self):
         """Verifies android/app/build.gradle specifies versionName '1.7.67'."""

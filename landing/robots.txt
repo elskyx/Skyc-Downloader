@@ -1,5 +1,5 @@
-# robots.txt for Zennx Landing
+# robots.txt for Skyc Landing
 User-agent: *
 Allow: /
 
-Sitemap: https://zennx.vercel.app/sitemap.xml
+Sitemap: https://skyc.vercel.app/sitemap.xml

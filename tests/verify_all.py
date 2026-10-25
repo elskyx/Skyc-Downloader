@@ -70,8 +70,8 @@ from tests.test_tier4_parity import TestTier4CrossPlatformParity
 
 TIER_MAP = {
     1: ("Tier 1: Asset Quality & Dimensions", TestTier1Assets),
-    2: ("Tier 2: Version Consistency (v1.7.67)", TestTier2Versions),
-    3: ("Tier 3: Zero Old Versions (1.6.7 Audit)", TestTier3ZeroOldVersions),
+    2: ("Tier 2: Version Consistency (v1.6.7)", TestTier2Versions),
+    3: ("Tier 3: Zero Hallucinated / Old Names (Zennx & 1.8.67 Audit)", TestTier3ZeroOldVersions),
     4: ("Tier 4: Cross-Platform Parity & Sync", TestTier4CrossPlatformParity),
 }
 

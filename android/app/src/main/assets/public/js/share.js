@@ -12,7 +12,7 @@ let selectedFmtIdx = 0;
 
 document.addEventListener("DOMContentLoaded", async () => {
   const urlParams = new URLSearchParams(window.location.search);
-  const sharedUrl = urlParams.get("url") || window.__ZENNX_SHARED_URL__ || window.__SKYC_SHARED_URL__ || "";
+  const sharedUrl = urlParams.get("url") || window.__SKYC_SHARED_URL__ || window.__SKYC_SHARED_URL__ || "";
 
   const statusBox = document.getElementById("shareStatusBox");
   const previewBox = document.getElementById("sharePreviewBox");
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (closeBtn) {
     closeBtn.addEventListener("click", () => {
-      if (window.ZennxShare?.close) window.ZennxShare.close();
+      if (window.SkycShare?.close) window.SkycShare.close();
       else if (window.SkycShare?.close) window.SkycShare.close();
       else window.close();
     });
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           showToast("Download Complete!", "success");
 
           setTimeout(() => {
-            if (window.ZennxShare?.close) window.ZennxShare.close();
+            if (window.SkycShare?.close) window.SkycShare.close();
             else if (window.SkycShare?.close) window.SkycShare.close();
             else window.close();
           }, 1200);

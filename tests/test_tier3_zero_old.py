@@ -37,14 +37,14 @@ DEFAULT_EXCLUDES = {
     "TEST_READY.md",
 }
 
-OLD_VERSION_PATTERN = re.compile(r'(?<![0-9])1\.6\.7(?!\.\d)(?![0-9])')
-PREVIOUS_VERSION_PATTERN = re.compile(r'(?<![0-9])1\.7\.67(?!\.\d)(?![0-9])')
+BOGUS_VERSION_PATTERN = re.compile(r'(?<![0-9])1\.8\.67(?!\.\d)(?![0-9])')
+ZENNX_PATTERN = re.compile(r'\bzennx\b', re.IGNORECASE)
 
 class TestTier3ZeroOldVersions(unittest.TestCase):
-    """Audits the entire active codebase for lingering '1.6.7' and '1.7.67' references."""
+    """Audits the entire active codebase for lingering 'zennx' or fake '1.8.67' references."""
 
-    def test_zero_occurrences_of_1_6_7(self):
-        """Scans all non-binary active project files and asserts 0 occurrences of '1.6.7'."""
+    def test_zero_occurrences_of_zennx(self):
+        """Scans all non-binary active project files and asserts 0 occurrences of 'zennx'."""
         violations = []
 
         for root, dirs, files in os.walk(PROJECT_ROOT):
@@ -64,18 +64,17 @@ class TestTier3ZeroOldVersions(unittest.TestCase):
                 try:
                     with open(full_path, "r", encoding="utf-8", errors="ignore") as f:
                         for lineno, line in enumerate(f, start=1):
-                            if OLD_VERSION_PATTERN.search(line):
+                            if ZENNX_PATTERN.search(line):
                                 violations.append(f"{rel_path}:{lineno}: {line.strip()}")
                 except Exception as e:
-                    # Non-fatal read error on obscure file
                     pass
 
         violation_report = "\n".join(violations)
         self.assertEqual(len(violations), 0,
-                         f"Found {len(violations)} lingering occurrences of '1.6.7':\n{violation_report}")
+                         f"Found {len(violations)} lingering occurrences of 'zennx':\n{violation_report}")
 
-    def test_zero_occurrences_of_1_7_67(self):
-        """Scans all non-binary active project files and asserts 0 occurrences of '1.7.67'."""
+    def test_zero_occurrences_of_1_8_67(self):
+        """Scans all non-binary active project files and asserts 0 occurrences of fake version '1.8.67'."""
         violations = []
 
         for root, dirs, files in os.walk(PROJECT_ROOT):
@@ -95,14 +94,14 @@ class TestTier3ZeroOldVersions(unittest.TestCase):
                 try:
                     with open(full_path, "r", encoding="utf-8", errors="ignore") as f:
                         for lineno, line in enumerate(f, start=1):
-                            if PREVIOUS_VERSION_PATTERN.search(line):
+                            if BOGUS_VERSION_PATTERN.search(line):
                                 violations.append(f"{rel_path}:{lineno}: {line.strip()}")
                 except Exception as e:
                     pass
 
         violation_report = "\n".join(violations)
         self.assertEqual(len(violations), 0,
-                         f"Found {len(violations)} lingering occurrences of '1.7.67':\n{violation_report}")
+                         f"Found {len(violations)} lingering occurrences of '1.8.67':\n{violation_report}")
 
 if __name__ == "__main__":
     unittest.main()

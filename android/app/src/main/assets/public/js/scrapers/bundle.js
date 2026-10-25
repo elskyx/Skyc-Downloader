@@ -1,5 +1,5 @@
 "use strict";
-var __ZennxScraperEngine = (() => {
+var __SkycScraperEngine = (() => {
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
   var __getOwnPropNames = Object.getOwnPropertyNames;
@@ -1407,8 +1407,8 @@ var __ZennxScraperEngine = (() => {
   return __toCommonJS(index_exports);
 })();
 
-const __SkycScraperEngine = __ZennxScraperEngine;
-if (typeof module !== 'undefined' && module.exports) { module.exports = __ZennxScraperEngine; }
-if (typeof window !== 'undefined') { window.__ZennxScraperEngine = __ZennxScraperEngine; window.__SkycScraperEngine = __ZennxScraperEngine; }
-if (typeof globalThis !== 'undefined') { globalThis.__ZennxScraperEngine = __ZennxScraperEngine; globalThis.__SkycScraperEngine = __ZennxScraperEngine; }
+const __ZennxScraperEngine = __SkycScraperEngine;
+if (typeof module !== 'undefined' && module.exports) { module.exports = __SkycScraperEngine; }
+if (typeof window !== 'undefined') { window.__SkycScraperEngine = __SkycScraperEngine; window.__ZennxScraperEngine = __SkycScraperEngine; }
+if (typeof globalThis !== 'undefined') { globalThis.__SkycScraperEngine = __SkycScraperEngine; globalThis.__ZennxScraperEngine = __SkycScraperEngine; }
 

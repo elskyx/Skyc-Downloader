@@ -1,18 +1,18 @@
 // public/js/modules/update.js
 /**
- * Zennx Downloader — Update & Notification Engine
+ * Skyc Downloader — Update & Notification Engine
  * Monitors GitHub Releases, Repository Commits on main, and Scraper OTA Patches.
  * Notifies the user via rich interactive dialogs, sticky banners, status pills, and Web Notifications.
  */
 import { showToast, triggerHaptic, formatRelativeTime } from "../utils/index.js";
 import { checkOtaScraperUpdate } from "./updateScrapers.js";
 
-export const APP_CURRENT_VERSION = "1.8.67";
+export const APP_CURRENT_VERSION = "1.6.7";
 export const APP_BUILD_COMMIT = "3afa2fc";
-export const GITHUB_REPO = "elskyx/Zennx-Downloader";
-export const GITHUB_RELEASES_API = "https://api.github.com/repos/elskyx/Zennx-Downloader/releases/latest";
-export const GITHUB_COMMITS_API = "https://api.github.com/repos/elskyx/Zennx-Downloader/commits/main";
-export const SCRAPER_MANIFEST_URL = "https://raw.githubusercontent.com/elskyx/Zennx-Downloader/main/public/scrapers-version.json";
+export const GITHUB_REPO = "elskyx/Skyc-Downloader";
+export const GITHUB_RELEASES_API = "https://api.github.com/repos/elskyx/Skyc-Downloader/releases/latest";
+export const GITHUB_COMMITS_API = "https://api.github.com/repos/elskyx/Skyc-Downloader/commits/main";
+export const SCRAPER_MANIFEST_URL = "https://raw.githubusercontent.com/elskyx/Skyc-Downloader/main/public/scrapers-version.json";
 
 let activeUpdateInfo = null;
 
@@ -95,7 +95,7 @@ export async function checkForAppUpdates({ manual = false } = {}) {
           badge: "NEW RELEASE",
           version: `v${latestTag}`,
           rawVersion: latestTag,
-          title: `Zennx Downloader v${latestTag}`,
+          title: `Skyc Downloader v${latestTag}`,
           changelog: cleanChangelog(releaseData.body) || `Versi baru v${latestTag} telah dirilis dengan pembaruan stabilitas dan fitur terbaru.`,
           publishedAt: releaseData.published_at || new Date().toISOString(),
           releaseUrl: releaseData.html_url || `https://github.com/${GITHUB_REPO}/releases`,
@@ -263,7 +263,7 @@ function handleNoUpdate(manual) {
   updateSettingsViewStatus(null);
 
   if (manual) {
-    showToast(`Zennx is up to date (v${APP_CURRENT_VERSION})`, "success");
+    showToast(`Skyc is up to date (v${APP_CURRENT_VERSION})`, "success");
     triggerHaptic("light");
   }
 }
@@ -294,7 +294,7 @@ export function showUpdateModal(info = activeUpdateInfo) {
     badgeEl.className = info.type === "commit" ? "badge badge-cobalt" : "badge badge-terracotta";
   }
 
-  if (titleEl) titleEl.textContent = info.title || "Zennx Update Available";
+  if (titleEl) titleEl.textContent = info.title || "Skyc Update Available";
   if (verEl) verEl.textContent = info.version || "";
   if (timeEl) {
     const relTime = formatRelativeTime(new Date(info.publishedAt).getTime());
@@ -519,7 +519,7 @@ export async function requestNotificationPermission() {
   try {
     const perm = await Notification.requestPermission();
     if (perm === "granted") {
-      showToast("Notifications enabled for Zennx updates!", "success");
+      showToast("Notifications enabled for Skyc updates!", "success");
       triggerHaptic("medium");
       return true;
     } else {
@@ -544,7 +544,7 @@ function cleanChangelog(raw) {
 }
 
 /**
- * Compares two semantic version strings (e.g. 1.8.68 > 1.8.67)
+ * Compares two semantic version strings (e.g. 1.8.68 > 1.6.7)
  */
 export function isVersionGreater(latest, current) {
   if (!latest || !current) return false;

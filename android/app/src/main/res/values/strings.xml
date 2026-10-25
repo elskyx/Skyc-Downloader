@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Zennx Downloader</string>
-    <string name="title_activity_main">Zennx Downloader</string>
-    <string name="package_name">com.zennx.downloader</string>
-    <string name="custom_url_scheme">zennx</string>
+    <string name="app_name">Skyc Downloader</string>
+    <string name="title_activity_main">Skyc Downloader</string>
+    <string name="package_name">com.skyc.downloader</string>
+    <string name="custom_url_scheme">skyc</string>
 </resources>

@@ -3,28 +3,28 @@ import { TiltedGridHero, type TiltedGridImage } from "@/components/ui/tilted-gri
 
 export const SKYC_HERO_SNAPSHOTS: TiltedGridImage[] = [
   {
-    src: "/assets/snapshots/zennx-downloader-home-dark.png",
-    alt: "Zennx Downloader Home URL Composer in Claude Obsidian Dark Mode",
+    src: "/assets/snapshots/skyc-downloader-home-dark.png",
+    alt: "Skyc Downloader Home URL Composer in Claude Obsidian Dark Mode",
   },
   {
-    src: "/assets/snapshots/zennx-downloader-home-light.png",
-    alt: "Zennx Downloader Home URL Composer in Warm Parchment Light Mode",
+    src: "/assets/snapshots/skyc-downloader-home-light.png",
+    alt: "Skyc Downloader Home URL Composer in Warm Parchment Light Mode",
   },
   {
-    src: "/assets/snapshots/zennx-downloader-batch.png",
-    alt: "Zennx Downloader Multi-stream Batch Downloader Queue",
+    src: "/assets/snapshots/skyc-downloader-batch.png",
+    alt: "Skyc Downloader Multi-stream Batch Downloader Queue",
   },
   {
-    src: "/assets/snapshots/zennx-downloader-downloads.png",
-    alt: "Zennx Downloader Media Player and Photo Gallery",
+    src: "/assets/snapshots/skyc-downloader-downloads.png",
+    alt: "Skyc Downloader Media Player and Photo Gallery",
   },
   {
-    src: "/assets/snapshots/zennx-downloader-platforms.png",
-    alt: "Zennx Downloader 16+ Supported Social Media Platforms Matrix",
+    src: "/assets/snapshots/skyc-downloader-platforms.png",
+    alt: "Skyc Downloader 16+ Supported Social Media Platforms Matrix",
   },
   {
-    src: "/assets/snapshots/zennx-downloader-settings.png",
-    alt: "Zennx Downloader Zero-Cloud Storage & OTA Hot-Patch Settings",
+    src: "/assets/snapshots/skyc-downloader-settings.png",
+    alt: "Skyc Downloader Zero-Cloud Storage & OTA Hot-Patch Settings",
   },
 ];
 
@@ -54,10 +54,10 @@ export default function TiltedGridHeroDemo() {
 
         <div className="flex flex-wrap items-center justify-center gap-3 px-6">
           <a
-            href="https://github.com/elskyx/Zennx/releases/latest"
+            href="https://github.com/elskyx/Skyc/releases/latest"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-terracotta text-white font-medium text-sm hover:brightness-110 transition-colors duration-200 shadow-lg shadow-terracotta/20 cursor-pointer"
           >
-            Download Zennx
+            Download Skyc
           </a>
           <a
             href="#simulator"

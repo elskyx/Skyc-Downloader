@@ -3,14 +3,14 @@ import path from "path";
 import os from "os";
 
 export const CHROME_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36";
-export const DEFAULT_DOWNLOAD_DIR = path.join(os.homedir(), "Downloads", "Zennx");
-export const ZENNX_DIR = path.join(os.homedir(), ".zennx");
-export const CONFIG_PATH = path.join(ZENNX_DIR, "config.json");
-export const HISTORY_PATH = path.join(ZENNX_DIR, "history.json");
+export const DEFAULT_DOWNLOAD_DIR = path.join(os.homedir(), "Downloads", "Skyc");
+export const SKYC_DIR = path.join(os.homedir(), ".skyc");
+export const CONFIG_PATH = path.join(SKYC_DIR, "config.json");
+export const HISTORY_PATH = path.join(SKYC_DIR, "history.json");
 
-// Ensure .zennx config directory exists
-if (!fs.existsSync(ZENNX_DIR)) {
-  fs.mkdirSync(ZENNX_DIR, { recursive: true });
+// Ensure .skyc config directory exists
+if (!fs.existsSync(SKYC_DIR)) {
+  fs.mkdirSync(SKYC_DIR, { recursive: true });
 }
 
 export function detectPlatform(url) {
@@ -35,11 +35,11 @@ export function detectPlatform(url) {
 }
 
 export function sanitizeFilename(title, maxLength = 80) {
-  if (!title) return `zennx_${Date.now()}`;
+  if (!title) return `skyc_${Date.now()}`;
   let clean = title.replace(/[\\/:*?"<>|]/g, "_").replace(/[\x00-\x1f]/g, "").trim();
   clean = clean.replace(/\s+/g, " ");
   if (clean.length > maxLength) clean = clean.substring(0, maxLength).trim();
-  return clean || `zennx_${Date.now()}`;
+  return clean || `skyc_${Date.now()}`;
 }
 
 export async function cliFetch(options) {

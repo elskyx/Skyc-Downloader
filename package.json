@@ -1,11 +1,11 @@
 {
-  "name": "zennx-downloader",
-  "version": "1.8.67",
-  "description": "Zennx Downloader — Universal, Zero-Cloud, Client-Side Media Downloader for Android, Windows, and CLI.",
+  "name": "skyc-downloader",
+  "version": "1.6.7",
+  "description": "Skyc Downloader — Universal, Zero-Cloud, Client-Side Media Downloader for Android, Windows, and CLI.",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/elskyx/Zennx-Downloader.git"
+    "url": "https://github.com/elskyx/Skyc-Downloader.git"
   },
   "workspaces": [
     "cli"

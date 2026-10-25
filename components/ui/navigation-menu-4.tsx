@@ -47,9 +47,9 @@ const navigationLinks = [
     submenu: true,
     type: "simple",
     items: [
-      { href: "#downloads", label: "Android APK (v1.8.67)" },
+      { href: "#downloads", label: "Android APK (v1.6.7)" },
       { href: "#downloads", label: "Windows Desktop (x64)" },
-      { href: "#downloads", label: "Terminal CLI (@elskyx/zennx)" },
+      { href: "#downloads", label: "Terminal CLI (@elskyx/skyc)" },
       { href: "#platforms", label: "16+ Supported Platforms" },
     ],
   },
@@ -157,10 +157,10 @@ export default function NavigationMenu4() {
 
           {/* Main nav */}
           <div className="flex items-center gap-6">
-            <a href="/" aria-label="Zennx Homepage" className="flex items-center gap-2 text-primary font-bold tracking-tight text-lg hover:opacity-90 transition-opacity">
-              <img src="/logo.svg" alt="Zennx Logo" className="w-7 h-7" onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }} />
-              <span>Zennx</span>
-              <span className="text-xs bg-muted px-1.5 py-0.5 rounded-full font-mono font-medium text-muted-foreground">v1.8.67</span>
+            <a href="/" aria-label="Skyc Homepage" className="flex items-center gap-2 text-primary font-bold tracking-tight text-lg hover:opacity-90 transition-opacity">
+              <img src="/logo.svg" alt="Skyc Logo" className="w-7 h-7" onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }} />
+              <span>Skyc</span>
+              <span className="text-xs bg-muted px-1.5 py-0.5 rounded-full font-mono font-medium text-muted-foreground">v1.6.7</span>
             </a>
 
             {/* Navigation menu */}
@@ -263,10 +263,10 @@ export default function NavigationMenu4() {
         {/* Right side */}
         <div className="flex items-center gap-2">
           <Button asChild variant="ghost" size="sm" className="text-sm">
-            <a href="https://github.com/elskyx/Zennx-Downloader" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://github.com/elskyx/Skyc-Downloader" target="_blank" rel="noopener">GitHub</a>
           </Button>
           <Button asChild size="sm" className="text-sm bg-primary text-primary-foreground">
-            <a href="#downloads">Get Zennx</a>
+            <a href="#downloads">Get Skyc</a>
           </Button>
         </div>
       </div>

@@ -118,26 +118,20 @@ server.listen(4892, async () => {
       await snap.setup();
       await page.waitForTimeout(600);
 
-      const zennxFull = `zennx-downloader-${snap.base}.png`;
-      const zennxShort = `zennx-${snap.base}.png`;
       const skycFull = `skyc-downloader-${snap.base}.png`;
       const skycShort = `skyc-${snap.base}.png`;
 
-      const primaryPath = path.join(landingDir, zennxFull);
+      const primaryPath = path.join(landingDir, skycFull);
       await page.screenshot({ path: primaryPath });
 
       // Mirror to landingDir
-      fs.copyFileSync(primaryPath, path.join(landingDir, zennxShort));
-      fs.copyFileSync(primaryPath, path.join(landingDir, skycFull));
       fs.copyFileSync(primaryPath, path.join(landingDir, skycShort));
 
       // Mirror to aboutDir
-      fs.copyFileSync(primaryPath, path.join(aboutDir, zennxFull));
-      fs.copyFileSync(primaryPath, path.join(aboutDir, zennxShort));
       fs.copyFileSync(primaryPath, path.join(aboutDir, skycFull));
       fs.copyFileSync(primaryPath, path.join(aboutDir, skycShort));
 
-      console.log(`Saved snapshot: ${zennxFull} (with zennx/skyc mirrors)`);
+      console.log(`Saved snapshot: ${skycFull} and ${skycShort}`);
     }
 
     await browser.close();

@@ -89,11 +89,11 @@ class TestTier4CrossPlatformParity(unittest.TestCase):
 
         if about_html.exists():
             content = about_html.read_text(encoding="utf-8")
-            self.assertIn("1.8.67", content, "About-Skyc/index.html does not contain target version '1.8.67'")
+            self.assertIn("1.6.7", content, "About-Skyc/index.html does not contain target version '1.6.7'")
 
         if about_js.exists():
             content = about_js.read_text(encoding="utf-8")
-            self.assertIn("1.8.67", content, "About-Skyc/script.js does not contain target version '1.8.67'")
+            self.assertIn("1.6.7", content, "About-Skyc/script.js does not contain target version '1.6.7'")
 
     def test_06_android_capacitor_public_assets_sync(self):
         """Verifies android/app/src/main/assets/public/ mirrors public/ after npm run android:sync."""

@@ -1,5 +1,5 @@
 /**
- * Zennx Landing Page — Enhanced 21st.dev Interactive Engine
+ * Skyc Landing Page — Enhanced 21st.dev Interactive Engine
  * - Scroll Reading Progress Indicator
  * - Specular Spotlight System ([data-spotlight])
  * - 3D Perspective Tilt on Desktop ([data-tilt])
@@ -456,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let count = 0;
     let grainTile = null;
 
-    const wordmark = 'zennx';
+    const wordmark = 'skyc';
     const dotGap = 6.5;
     const radius = 85;
     const crop = 0.22;
@@ -717,28 +717,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const SKYC_SNAPSHOTS = [
       {
-        src: 'assets/snapshots/zennx-downloader-home-dark.png',
-        alt: 'Zennx Downloader URL Composer • Deep Obsidian Dark Mode'
+        src: 'assets/snapshots/skyc-downloader-home-dark.png',
+        alt: 'Skyc Downloader URL Composer • Deep Obsidian Dark Mode'
       },
       {
-        src: 'assets/snapshots/zennx-downloader-home-light.png',
-        alt: 'Zennx Downloader URL Composer • Warm Linen Light Mode'
+        src: 'assets/snapshots/skyc-downloader-home-light.png',
+        alt: 'Skyc Downloader URL Composer • Warm Linen Light Mode'
       },
       {
-        src: 'assets/snapshots/zennx-downloader-batch.png',
-        alt: 'Zennx Downloader Multi-Stream Batch Downloader Queue'
+        src: 'assets/snapshots/skyc-downloader-batch.png',
+        alt: 'Skyc Downloader Multi-Stream Batch Downloader Queue'
       },
       {
-        src: 'assets/snapshots/zennx-downloader-downloads.png',
-        alt: 'Zennx Downloader Media Player & Downloads Gallery'
+        src: 'assets/snapshots/skyc-downloader-downloads.png',
+        alt: 'Skyc Downloader Media Player & Downloads Gallery'
       },
       {
-        src: 'assets/snapshots/zennx-downloader-platforms.png',
-        alt: 'Zennx Downloader 16+ Supported Social Media Platforms'
+        src: 'assets/snapshots/skyc-downloader-platforms.png',
+        alt: 'Skyc Downloader 16+ Supported Social Media Platforms'
       },
       {
-        src: 'assets/snapshots/zennx-downloader-settings.png',
-        alt: 'Zennx Downloader Zero-Cloud Storage & OTA Settings'
+        src: 'assets/snapshots/skyc-downloader-settings.png',
+        alt: 'Skyc Downloader Zero-Cloud Storage & OTA Settings'
       }
     ];
 
@@ -919,7 +919,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // -------------------------------------------------------------------------
   (async function initReleaseNotification() {
     try {
-      const res = await fetch("https://api.github.com/repos/elskyx/Zennx-Downloader/releases/latest", {
+      const res = await fetch("https://api.github.com/repos/elskyx/Skyc-Downloader/releases/latest", {
         headers: { Accept: "application/vnd.github.v3+json" },
       });
       if (!res.ok) return;
@@ -927,7 +927,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!release || !release.tag_name) return;
 
       const latestTag = release.tag_name.replace(/^v/, "").trim();
-      const currentVersion = "1.8.67";
+      const currentVersion = "1.6.7";
 
       // If newer release or assets exist, update download links dynamically
       const assets = Array.isArray(release.assets) ? release.assets : [];

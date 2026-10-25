@@ -173,7 +173,7 @@ def create_nsis_header(master_img):
         font_title = ImageFont.load_default()
         font_sub = ImageFont.load_default()
 
-    draw.text((58 * ss, 12 * ss), "Zennx Downloader", fill=PARCHMENT_RGB, font=font_title)
+    draw.text((58 * ss, 12 * ss), "Skyc Downloader", fill=PARCHMENT_RGB, font=font_title)
     draw.text((58 * ss, 32 * ss), "Universal & Zero-Cloud", fill=TERRACOTTA_RGB, font=font_sub)
 
     return img.resize((w, h), Image.Resampling.LANCZOS)
@@ -213,7 +213,7 @@ def create_nsis_sidebar(master_img):
         font_tag = ImageFont.load_default()
         font_desc = ImageFont.load_default()
 
-    draw.text((w * ss / 2, 126 * ss), "Zennx", fill=PARCHMENT_RGB, font=font_title, anchor="mt")
+    draw.text((w * ss / 2, 126 * ss), "Skyc", fill=PARCHMENT_RGB, font=font_title, anchor="mt")
     draw.text((w * ss / 2, 156 * ss), "Save anything, From anywhere.", fill=TERRACOTTA_RGB, font=font_tag, anchor="mt")
 
     # Divider line
@@ -260,7 +260,7 @@ def create_wix_banner(master_img):
         font_title = ImageFont.load_default()
         font_sub = ImageFont.load_default()
 
-    draw.text((20 * ss, 12 * ss), "Zennx Setup", fill=PARCHMENT_RGB, font=font_title)
+    draw.text((20 * ss, 12 * ss), "Skyc Setup", fill=PARCHMENT_RGB, font=font_title)
     draw.text((20 * ss, 32 * ss), "Universal Zero-Cloud Media Downloader", fill=TERRACOTTA_RGB, font=font_sub)
 
     return img.resize((w, h), Image.Resampling.LANCZOS)
@@ -305,8 +305,8 @@ def generate_svg_wrapper(master_img_path, output_path):
         b64_data = base64.b64encode(f.read()).decode('ascii')
     
     svg_content = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
-  <!-- Zennx Official Terracotta Brand Mark -->
-  <title>Zennx Downloader</title>
+  <!-- Skyc Official Terracotta Brand Mark -->
+  <title>Skyc Downloader</title>
   <image width="512" height="512" href="data:image/png;base64,{b64_data}"/>
 </svg>
 '''
@@ -476,15 +476,12 @@ def run_pipeline():
     pwa_sizes = [16, 32, 64, 128, 256, 512]
     for sz in pwa_sizes:
         out_path = os.path.join(pwa_png_dir, f"skyc-app-icon-{sz}.png")
-        zennx_path = os.path.join(pwa_png_dir, f"zennx-app-icon-{sz}.png")
         if sz == 512:
             shutil.copy2(SOURCE_ICON_PATH, out_path)
-            shutil.copy2(SOURCE_ICON_PATH, zennx_path)
         else:
             pwa_icon = master.resize((sz, sz), Image.Resampling.LANCZOS)
             pwa_icon.save(out_path, "PNG")
-            pwa_icon.save(zennx_path, "PNG")
-        print(f"  [+] {out_path} and {zennx_path} ({sz}x{sz})")
+        print(f"  [+] {out_path} ({sz}x{sz})")
 
     # Favicon PNG (256x256)
     fav_png = master.resize((256, 256), Image.Resampling.LANCZOS)

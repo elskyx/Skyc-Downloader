@@ -17,7 +17,7 @@ import {
   DEFAULT_DOWNLOAD_DIR,
 } from "./engine.js";
 
-const CLI_VERSION = "1.8.67";
+const CLI_VERSION = "1.6.7";
 
 // Dynamic clack and picocolors with graceful fallback
 let p = null;
@@ -77,21 +77,21 @@ try {
 }
 
 function printBanner() {
-  const brand = pc.bold(pc.bgHex ? pc.bgHex("#1A1917")(pc.white(" ZENNX ")) : "[ZENNX]") + " " + pc.bold(`v${CLI_VERSION}`);
+  const brand = pc.bold(pc.bgHex ? pc.bgHex("#1A1917")(pc.white(" SKYC ")) : "[SKYC]") + " " + pc.bold(`v${CLI_VERSION}`);
   const sub = pc.dim("Save anything, from anywhere. Client-side media downloader.");
   p.intro(`${brand}\n  ${sub}`);
 }
 
 function printHelp() {
   console.log(`
-${pc.bold("[ZENNX CLI]")} ${pc.bold(`v${CLI_VERSION}`)}
+${pc.bold("[SKYC CLI]")} ${pc.bold(`v${CLI_VERSION}`)}
 
 ${pc.bold("USAGE:")}
-  ${pc.white("npx @elskyx/zennx")} ${pc.dim("[URL]")} ${pc.dim("[OPTIONS]")}
-  ${pc.white("zennx")} ${pc.dim("[URL]")} ${pc.dim("[OPTIONS]")}
+  ${pc.white("npx @elskyx/skyc")} ${pc.dim("[URL]")} ${pc.dim("[OPTIONS]")}
+  ${pc.white("skyc")} ${pc.dim("[URL]")} ${pc.dim("[OPTIONS]")}
 
 ${pc.bold("OPTIONS:")}
-  ${pc.white("-o, --output <dir>")}   Destination folder (default: ${pc.dim("~/Downloads/Zennx")})
+  ${pc.white("-o, --output <dir>")}   Destination folder (default: ${pc.dim("~/Downloads/Skyc")})
   ${pc.white("-a, --audio")}          Download audio-only stream (MP3/FLAC/M4A)
   ${pc.white("-p, --pdf")}            Compile photo album into a single PDF
   ${pc.white("-y, --yes")}            Automatically pick the highest quality format
@@ -104,13 +104,13 @@ ${pc.bold("SUPPORTED PLATFORMS (16+):")}
 
 ${pc.bold("EXAMPLES:")}
   ${pc.dim("# Interactive REPL")}
-  zennx
+  skyc
 
   ${pc.dim("# Direct link")}
-  zennx https://www.tiktok.com/@user/video/123456789
+  skyc https://www.tiktok.com/@user/video/123456789
 
   ${pc.dim("# Extract MP3/FLAC audio")}
-  zennx https://youtu.be/dQw4w9WgXcQ -a
+  skyc https://youtu.be/dQw4w9WgXcQ -a
 `);
 }
 

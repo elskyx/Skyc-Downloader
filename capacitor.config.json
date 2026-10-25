@@ -1,6 +1,6 @@
 {
-  "appId": "com.zennx.downloader",
-  "appName": "Zennx Downloader",
+  "appId": "com.skyc.downloader",
+  "appName": "Skyc Downloader",
   "webDir": "public",
   "bundledWebRuntime": false,
   "server": {
