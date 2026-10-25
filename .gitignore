@@ -52,3 +52,6 @@ output_png/
 output_svg/
 run_logo_generator.*
 generate_png_icons.py
+
+__pycache__/
+*.pyc
