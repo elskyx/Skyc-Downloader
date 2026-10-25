@@ -1,12 +1,12 @@
 [package]
-name = "skyc"
-version = "1.6.7"
-description = "Skyc Client-Side Media Downloader for Windows"
+name = "zennx"
+version = "1.8.67"
+description = "Zennx Client-Side Media Downloader for Windows"
 authors = ["elskyx"]
 edition = "2021"
 
 [lib]
-name = "skyc_lib"
+name = "zennx_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]

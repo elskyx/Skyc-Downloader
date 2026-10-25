@@ -1,11 +1,11 @@
 {
-  "name": "skyc-downloader",
-  "version": "1.6.7",
-  "description": "Skyc Downloader — Client-side media downloader app for Android, Windows, and CLI with a Claude-inspired theme.",
+  "name": "zennx-downloader",
+  "version": "1.8.67",
+  "description": "Zennx Downloader — Universal, Zero-Cloud, Client-Side Media Downloader for Android, Windows, and CLI.",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/elskyx/Skyc-Downloader.git"
+    "url": "https://github.com/elskyx/Zennx-Downloader.git"
   },
   "workspaces": [
     "cli"
@@ -32,8 +32,10 @@
     "@capacitor/share": "^6.0.0",
     "@coflyn/scrapr": "^1.3.1",
     "@radix-ui/react-avatar": "^1.3.1",
+    "@radix-ui/react-dialog": "^1.3.1",
     "@radix-ui/react-dropdown-menu": "^2.2.1",
     "@radix-ui/react-icons": "^1.3.2",
+    "@radix-ui/react-label": "^2.1.17",
     "@radix-ui/react-navigation-menu": "^1.4.1",
     "@radix-ui/react-popover": "^1.3.1",
     "@radix-ui/react-scroll-area": "^1.4.0",

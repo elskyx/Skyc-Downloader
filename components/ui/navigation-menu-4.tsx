@@ -47,9 +47,9 @@ const navigationLinks = [
     submenu: true,
     type: "simple",
     items: [
-      { href: "#downloads", label: "Android APK (v1.6.7)" },
+      { href: "#downloads", label: "Android APK (v1.8.67)" },
       { href: "#downloads", label: "Windows Desktop (x64)" },
-      { href: "#downloads", label: "Terminal CLI (@elskyx/skyc)" },
+      { href: "#downloads", label: "Terminal CLI (@elskyx/zennx)" },
       { href: "#platforms", label: "16+ Supported Platforms" },
     ],
   },
@@ -94,15 +94,15 @@ export default function NavigationMenu4() {
                 >
                   <path
                     d="M4 12L20 12"
-                    className="origin-center -translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[315deg]"
+                    className="origin-center -translate-y-[7px] transition-transform duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[315deg]"
                   />
                   <path
                     d="M4 12H20"
-                    className="origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45"
+                    className="origin-center transition-transform duration-300 ease-[cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45"
                   />
                   <path
                     d="M4 12H20"
-                    className="origin-center translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[135deg]"
+                    className="origin-center translate-y-[7px] transition-transform duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[135deg]"
                   />
                 </svg>
               </Button>
@@ -157,10 +157,10 @@ export default function NavigationMenu4() {
 
           {/* Main nav */}
           <div className="flex items-center gap-6">
-            <a href="#" className="flex items-center gap-2 text-primary font-bold tracking-tight text-lg hover:opacity-90 transition-opacity">
-              <img src="/logo.svg" alt="Skyc Logo" className="w-7 h-7" onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }} />
-              <span>Skyc</span>
-              <span className="text-xs bg-muted px-1.5 py-0.5 rounded-full font-mono font-medium text-muted-foreground">v1.6.7</span>
+            <a href="/" aria-label="Zennx Homepage" className="flex items-center gap-2 text-primary font-bold tracking-tight text-lg hover:opacity-90 transition-opacity">
+              <img src="/logo.svg" alt="Zennx Logo" className="w-7 h-7" onError={(e) => { (e.target as HTMLElement).style.display = 'none'; }} />
+              <span>Zennx</span>
+              <span className="text-xs bg-muted px-1.5 py-0.5 rounded-full font-mono font-medium text-muted-foreground">v1.8.67</span>
             </a>
 
             {/* Navigation menu */}
@@ -184,7 +184,7 @@ export default function NavigationMenu4() {
                                   <NavigationMenuLink asChild>
                                     <a
                                       href={item.href}
-                                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                      className="block select-none space-y-1 rounded-md p-3 leading-none no-underline transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus:bg-accent focus:text-accent-foreground"
                                     >
                                       {/* Display icon if present */}
                                       {link.type === "icon" && "icon" in item && (
@@ -263,10 +263,10 @@ export default function NavigationMenu4() {
         {/* Right side */}
         <div className="flex items-center gap-2">
           <Button asChild variant="ghost" size="sm" className="text-sm">
-            <a href="https://github.com/elskyx/Skyc" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://github.com/elskyx/Zennx-Downloader" target="_blank" rel="noopener">GitHub</a>
           </Button>
           <Button asChild size="sm" className="text-sm bg-primary text-primary-foreground">
-            <a href="#downloads">Get Skyc</a>
+            <a href="#downloads">Get Zennx</a>
           </Button>
         </div>
       </div>

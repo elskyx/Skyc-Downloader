@@ -5,7 +5,7 @@
  */
 export function sanitizeFilename(title, maxLength = 80) {
   if (!title || typeof title !== "string") {
-    return `skyc_${Date.now()}`;
+    return `zennx_${Date.now()}`;
   }
 
   // Remove invalid file name characters across Windows/Android/Linux: \ / : * ? " < > |
@@ -21,22 +21,27 @@ export function sanitizeFilename(title, maxLength = 80) {
     clean = clean.substring(0, maxLength).trim();
   }
 
-  return clean || `skyc_${Date.now()}`;
+  return clean || `zennx_${Date.now()}`;
 }
 
 /**
- * Determines target folder based on media type (Movies/Skyc, Music/Skyc, Pictures/Skyc)
+ * Determines target folder based on media type (Movies/Zennx, Music/Zennx, Pictures/Zennx)
  */
 export function getMediaTargetDirectory(mediaType) {
-  const custom = localStorage.getItem("skyc_custom_storage_dir");
+  let custom = null;
+  if (typeof localStorage !== "undefined" && typeof localStorage.getItem === "function") {
+    try {
+      custom = localStorage.getItem("zennx_custom_storage_dir") || localStorage.getItem("skyc_custom_storage_dir");
+    } catch (_) {}
+  }
   if (custom && custom.trim()) return custom.trim();
 
   const type = (mediaType || "").toLowerCase();
-  if (type === "audio" || type === "music" || type === "mp3") {
-    return "Music/Skyc";
+  if (type === "audio" || type === "music" || type === "mp3" || type === "flac") {
+    return "Music/Zennx";
   }
   if (type === "photo" || type === "image" || type === "pdf") {
-    return "Pictures/Skyc";
+    return "Pictures/Zennx";
   }
-  return "Movies/Skyc";
+  return "Movies/Zennx";
 }

@@ -19,5 +19,5 @@
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "impeccable_repo", "logo_generator_repo"]
 }

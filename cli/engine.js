@@ -3,14 +3,14 @@ import path from "path";
 import os from "os";
 
 export const CHROME_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36";
-export const DEFAULT_DOWNLOAD_DIR = path.join(os.homedir(), "Downloads", "Skyc");
-export const SKYC_DIR = path.join(os.homedir(), ".skyc");
-export const CONFIG_PATH = path.join(SKYC_DIR, "config.json");
-export const HISTORY_PATH = path.join(SKYC_DIR, "history.json");
+export const DEFAULT_DOWNLOAD_DIR = path.join(os.homedir(), "Downloads", "Zennx");
+export const ZENNX_DIR = path.join(os.homedir(), ".zennx");
+export const CONFIG_PATH = path.join(ZENNX_DIR, "config.json");
+export const HISTORY_PATH = path.join(ZENNX_DIR, "history.json");
 
-// Ensure .skyc config directory exists
-if (!fs.existsSync(SKYC_DIR)) {
-  fs.mkdirSync(SKYC_DIR, { recursive: true });
+// Ensure .zennx config directory exists
+if (!fs.existsSync(ZENNX_DIR)) {
+  fs.mkdirSync(ZENNX_DIR, { recursive: true });
 }
 
 export function detectPlatform(url) {
@@ -35,11 +35,11 @@ export function detectPlatform(url) {
 }
 
 export function sanitizeFilename(title, maxLength = 80) {
-  if (!title) return `skyc_${Date.now()}`;
+  if (!title) return `zennx_${Date.now()}`;
   let clean = title.replace(/[\\/:*?"<>|]/g, "_").replace(/[\x00-\x1f]/g, "").trim();
   clean = clean.replace(/\s+/g, " ");
   if (clean.length > maxLength) clean = clean.substring(0, maxLength).trim();
-  return clean || `skyc_${Date.now()}`;
+  return clean || `zennx_${Date.now()}`;
 }
 
 export async function cliFetch(options) {
@@ -191,20 +191,97 @@ export async function scrapeUrl(url) {
 
   // Spotify
   if (platform === "spotify") {
-    const res = await cliFetch({
-      method: "POST",
-      url: "https://api.spotifydown.com/download",
-      headers: { "Content-Type": "application/json" },
-      data: { link: url },
-    });
-    if (res?.success && res?.link) {
+    const trackIdMatch = url.match(/track\/([a-zA-Z0-9]+)/i);
+    const trackId = trackIdMatch ? trackIdMatch[1] : null;
+
+    let title = "Spotify Track";
+    let author = "Artist";
+    let thumbnail = "";
+
+    try {
+      const oRes = await fetch(`https://open.spotify.com/oembed?url=${encodeURIComponent(url)}`, {
+        headers: { "User-Agent": CHROME_UA, Accept: "application/json" },
+      });
+      if (oRes.ok) {
+        const oData = await oRes.json();
+        if (oData.title) title = oData.title;
+        if (oData.thumbnail_url) thumbnail = oData.thumbnail_url;
+        if (title.includes(" - song and lyrics by ")) {
+          const parts = title.split(" - song and lyrics by ");
+          title = parts[0].trim();
+          author = parts[1].trim();
+        }
+      }
+    } catch (_) {}
+
+    try {
+      const res = await cliFetch({
+        method: "POST",
+        url: "https://api.spotifydown.com/download",
+        headers: { "Content-Type": "application/json", Referer: "https://spotifydown.com/" },
+        data: { link: url },
+      });
+      if (res?.success && res?.link) {
+        return {
+          platform: "spotify",
+          title: res.metadata?.title || title,
+          author: res.metadata?.artists || author,
+          thumbnail: res.metadata?.cover || thumbnail,
+          duration: 0,
+          formats: [
+            {
+              id: "spot_flac",
+              label: `Audio FLAC (Lossless Hi-Fi) • ${res.metadata?.title || title} — ${res.metadata?.artists || author}`,
+              quality: "Lossless FLAC",
+              type: "audio",
+              ext: "flac",
+              title: res.metadata?.title || title,
+              author: res.metadata?.artists || author,
+              url: trackId ? `spotiflac_resolve:${trackId}` : `spotiflac_resolve:${encodeURIComponent(url)}`,
+            },
+            {
+              id: "spot_mp3",
+              label: `Audio MP3 (320kbps) • ${res.metadata?.title || title} — ${res.metadata?.artists || author}`,
+              quality: "320kbps",
+              type: "audio",
+              ext: "mp3",
+              title: res.metadata?.title || title,
+              author: res.metadata?.artists || author,
+              url: res.link,
+            },
+          ],
+          photos: [],
+        };
+      }
+    } catch (_) {}
+
+    if (trackId) {
       return {
         platform: "spotify",
-        title: res.metadata?.title || "Spotify Track",
-        author: res.metadata?.artists || "Artist",
-        thumbnail: res.metadata?.cover || "",
+        title,
+        author,
+        thumbnail,
         duration: 0,
-        formats: [{ id: "spot_mp3", label: "Audio MP3 (320kbps)", quality: "320kbps", type: "audio", ext: "mp3", url: res.link }],
+        formats: [
+          {
+            id: "spot_flac",
+            label: `Audio FLAC (Lossless Hi-Fi) • ${title} — ${author}`,
+            quality: "Lossless FLAC",
+            type: "audio",
+            ext: "flac",
+            title,
+            author,
+            url: `spotiflac_resolve:${trackId}`,
+          },
+          {
+            id: "spot_mp3",
+            label: `Audio MP3 (320kbps) • ${title} — ${author}`,
+            quality: "320kbps",
+            type: "audio",
+            ext: "mp3",
+            title,
+            author,
+        ],
         photos: [],
       };
     }
@@ -366,6 +443,103 @@ export async function resolveStreamUrl(url, onProgress = () => {}) {
 
     throw new Error("Unable to resolve YouTube stream. Please try again.");
   }
+
+  // Spotify Lossless FLAC Token (Mornye Engine)
+  if (url.startsWith("spotiflac_resolve:")) {
+    const trackId = url.replace("spotiflac_resolve:", "").trim();
+    onProgress(25, 0, 100);
+
+    // Tier A: Mornye Provider Gateway
+    try {
+      const qbzRes = await fetch("https://api.zarz.moe/v2/qbz", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json", "User-Agent": CHROME_UA },
+        body: JSON.stringify({ id: trackId, type: "track", url: `https://open.spotify.com/track/${trackId}`, quality: "27" }),
+      });
+      if (qbzRes.ok) {
+        const qbzData = await qbzRes.json();
+        const dlUrl = qbzData?.url || qbzData?.download_url || qbzData?.link;
+        if (dlUrl) return dlUrl;
+      }
+    } catch (_) {}
+
+    // Tier B: High-definition SpotiDown Stream
+    try {
+      const spotRes = await fetch("https://spotidown.com/api/download-track", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Referer: "https://spotidown.com/", "User-Agent": CHROME_UA },
+        body: JSON.stringify({ url: `https://open.spotify.com/track/${trackId}`, id: trackId }),
+      });
+      if (spotRes.ok) {
+        const spotData = await spotRes.json();
+        if (spotData?.downloadUrl) return spotData.downloadUrl;
+      }
+    } catch (_) {}
+
+    // Tier C: SpotifyDown Mirror
+    try {
+      const sdownRes = await fetch("https://api.spotifydown.com/download", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Referer: "https://spotifydown.com/", "User-Agent": CHROME_UA },
+        body: JSON.stringify({ link: `https://open.spotify.com/track/${trackId}` }),
+      });
+      if (sdownRes.ok) {
+        const sdownData = await sdownRes.json();
+        if (sdownData?.success && sdownData?.link) return sdownData.link;
+      }
+    } catch (_) {}
+
+    throw new Error(`Unable to resolve lossless FLAC stream for Spotify track ${trackId}`);
+  }
+
+  // Spotify MP3 Token
+  if (url.startsWith("spotidown_resolve:")) {
+    const trackId = url.replace("spotidown_resolve:", "").trim();
+    onProgress(25, 0, 100);
+    try {
+      const spotRes = await fetch("https://spotidown.com/api/download-track", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Referer: "https://spotidown.com/", "User-Agent": CHROME_UA },
+        body: JSON.stringify({ id: trackId }),
+      });
+      if (spotRes.ok) {
+        const spotData = await spotRes.json();
+        if (spotData?.downloadUrl) return spotData.downloadUrl;
+      }
+    } catch (_) {}
+    throw new Error("Unable to resolve Spotify audio stream");
+  }
+
+  // Apple Music Token
+  if (url.startsWith("applemusic_resolve:")) {
+    const payloadStr = url.replace("applemusic_resolve:", "");
+    onProgress(25, 0, 100);
+    try {
+      const res = await fetch("https://aplmate.com/action/track", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "X-Requested-With": "XMLHttpRequest",
+          Referer: "https://aplmate.com/",
+          Origin: "https://aplmate.com",
+          "User-Agent": CHROME_UA,
+        },
+        body: payloadStr,
+      });
+      if (res.ok) {
+        const parsed = await res.json();
+        const html = parsed?.data || "";
+        const linkMatch = html.match(/href="([^"]*(?:\/dl\?token=|download)[^"]*)"/i);
+        if (linkMatch) {
+          let resolved = linkMatch[1];
+          if (!resolved.startsWith("http")) resolved = `https://aplmate.com${resolved}`;
+          return resolved;
+        }
+      }
+    } catch (_) {}
+    throw new Error("Unable to resolve Apple Music stream");
+  }
+
   return url;
 }
 

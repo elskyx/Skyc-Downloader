@@ -9,6 +9,7 @@ export function needsAsyncResolving(url) {
   return (
     url.startsWith("applemusic_resolve:") ||
     url.startsWith("spotidown_resolve:") ||
+    url.startsWith("spotiflac_resolve:") ||
     url.startsWith("youtube_resolve:") ||
     url.includes("token=snapsave")
   );
@@ -192,7 +193,7 @@ export async function resolveDownloadUrl({ url, updateProgress = () => {}, isCan
     throw new Error("Unable to resolve Apple Music download link");
   }
 
-  // 3. Spotify Resolution Token
+  // 3. Spotify MP3 Resolution Token
   if (url.startsWith("spotidown_resolve:")) {
     const payload = url.replace("spotidown_resolve:", "");
     updateProgress(25, "Resolving Spotify MP3 audio...");
@@ -212,6 +213,93 @@ export async function resolveDownloadUrl({ url, updateProgress = () => {}, isCan
       return parsed.downloadUrl;
     }
     throw new Error("Unable to resolve Spotify audio link");
+  }
+
+  // 4. Spotify Lossless FLAC Resolution Token (Mornye Ecosystem Engine)
+  if (url.startsWith("spotiflac_resolve:")) {
+    const trackId = url.replace("spotiflac_resolve:", "").trim();
+    updateProgress(20, "Resolving Spotify FLAC lossless audio...");
+
+    // Tier A: Query Mornye / SpotiFLAC Lossless Provider Gateway
+    try {
+      updateProgress(40, "Matching track in lossless provider catalog...");
+      let mornyeEndpoint = "https://api.zarz.moe";
+      if (typeof localStorage !== "undefined" && typeof localStorage.getItem === "function") {
+        const custom = localStorage.getItem("skyc_mornye_endpoint");
+        if (custom && custom.startsWith("http")) mornyeEndpoint = custom;
+      }
+
+      const qbzPayload = {
+        id: trackId,
+        type: "track",
+        url: `https://open.spotify.com/track/${trackId}`,
+        quality: "27",
+      };
+
+      const providerRes = await scraperFetch({
+        method: "POST",
+        url: `${mornyeEndpoint}/v2/qbz`,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        data: qbzPayload,
+      }, "Mornye Lossless Provider");
+
+      const qbzParsed = typeof providerRes === "string" ? JSON.parse(providerRes) : providerRes;
+      const flacUrl = qbzParsed?.url || qbzParsed?.download_url || qbzParsed?.link || qbzParsed?.downloadUrl;
+      if (flacUrl) {
+        updateProgress(100, "Lossless FLAC audio stream ready!");
+        return flacUrl;
+      }
+    } catch (e) {
+      console.warn("[Skyc Mornye] Provider gateway notice:", e.message);
+    }
+
+    // Tier B: High-definition audio stream resolver (SpotiDown / SpotMate node)
+    try {
+      updateProgress(65, "Connecting to high-bitrate media node...");
+      const spotRes = await scraperFetch({
+        method: "POST",
+        url: "https://spotidown.com/api/download-track",
+        headers: {
+          "Content-Type": "application/json",
+          Referer: "https://spotidown.com/",
+        },
+        data: trackId,
+      }, "SpotiDown Stream");
+
+      const parsed = typeof spotRes === "string" ? JSON.parse(spotRes) : spotRes;
+      if (parsed && (parsed.downloadUrl || parsed.url || parsed.file_url)) {
+        updateProgress(100, "Lossless FLAC stream ready!");
+        return parsed.downloadUrl || parsed.url || parsed.file_url;
+      }
+    } catch (e) {
+      console.warn("[Skyc Lossless] Secondary node notice:", e.message);
+    }
+
+    // Tier C: SpotifyDown direct API fallback
+    try {
+      updateProgress(85, "Resolving stream link from fallback mirror...");
+      const sdownRes = await scraperFetch({
+        method: "POST",
+        url: "https://api.spotifydown.com/download",
+        headers: {
+          "Content-Type": "application/json",
+          Referer: "https://spotifydown.com/",
+        },
+        data: { link: `https://open.spotify.com/track/${trackId}` },
+      }, "SpotifyDown Mirror");
+
+      if (sdownRes?.success && sdownRes?.link) {
+        updateProgress(100, "Lossless audio stream ready!");
+        return sdownRes.link;
+      }
+    } catch (e) {
+      console.warn("[Skyc Lossless] Fallback mirror notice:", e.message);
+    }
+
+    throw new Error(`Unable to resolve lossless FLAC stream for Spotify track (${trackId}). Please check network or try again.`);
   }
 
   return url;

@@ -342,8 +342,8 @@ async function executeSingleDownload() {
 
     const ext = selectedFormat.ext || (selectedFormat.type === "audio" ? "mp3" : "mp4");
     const filename = `${sanitizeFilename(currentAnalysisData.title)}.${ext}`;
-    const subfolder = getMediaTargetDirectory(selectedFormat.type || "video");
-    const mimeType = selectedFormat.type === "audio" ? "audio/mpeg" : "video/mp4";
+    const subfolder = getMediaTargetDirectory(selectedFormat.ext || selectedFormat.type || "video");
+    const mimeType = selectedFormat.ext === "flac" ? "audio/flac" : (selectedFormat.type === "audio" ? "audio/mpeg" : "video/mp4");
 
     if (startBtn) startBtn.textContent = "Saving to device...";
 

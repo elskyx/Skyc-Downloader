@@ -1,5 +1,5 @@
 "use strict";
-var __SkycScraperEngine = (() => {
+var __ZennxScraperEngine = (() => {
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
   var __getOwnPropNames = Object.getOwnPropertyNames;
@@ -452,6 +452,30 @@ var __SkycScraperEngine = (() => {
 
   // src-scrapers/platforms/spotify.js
   async function scrapeSpotify(url, fetchClient) {
+    const trackIdMatch = url.match(/track\/([a-zA-Z0-9]+)/i);
+    const trackId = trackIdMatch ? trackIdMatch[1] : null;
+    let title = "Spotify Track";
+    let author = "Spotify Artist";
+    let thumbnail = "";
+    try {
+      const oembedRes = await fetchClient({
+        method: "GET",
+        url: `https://open.spotify.com/oembed?url=${encodeURIComponent(url)}`,
+        headers: {
+          Accept: "application/json"
+        }
+      }, "SpotifyOEmbed");
+      if (oembedRes && oembedRes.title) {
+        title = oembedRes.title;
+        if (oembedRes.thumbnail_url) thumbnail = oembedRes.thumbnail_url;
+        if (oembedRes.title.includes(" - song and lyrics by ")) {
+          const parts = oembedRes.title.split(" - song and lyrics by ");
+          title = parts[0].trim();
+          author = parts[1].trim();
+        }
+      }
+    } catch (_) {
+    }
     try {
       const res = await fetchClient({
         method: "POST",
@@ -463,19 +487,34 @@ var __SkycScraperEngine = (() => {
         data: { link: url }
       }, "SpotifyDown");
       if (res?.success && res?.link) {
+        const trackTitle = res.metadata?.title || title;
+        const trackAuthor = res.metadata?.artists || author;
+        const trackCover = res.metadata?.cover || thumbnail;
         return {
           platform: "spotify",
-          title: res.metadata?.title || "Spotify Track",
-          author: res.metadata?.artists || "Spotify Artist",
-          thumbnail: res.metadata?.cover || "",
+          title: trackTitle,
+          author: trackAuthor,
+          thumbnail: trackCover,
           duration: 0,
           formats: [
             {
+              id: "spotify_flac_lossless",
+              label: `Lossless FLAC \u2022 ${trackTitle} \u2014 ${trackAuthor}`,
+              quality: "Lossless FLAC",
+              type: "audio",
+              ext: "flac",
+              title: trackTitle,
+              author: trackAuthor,
+              url: trackId ? `spotiflac_resolve:${trackId}` : `spotiflac_resolve:${encodeURIComponent(url)}`
+            },
+            {
               id: "spotify_mp3_320",
-              label: "Audio MP3 (320kbps High Quality)",
+              label: `Audio MP3 320kbps \u2022 ${trackTitle} \u2014 ${trackAuthor}`,
               quality: "320kbps",
               type: "audio",
               ext: "mp3",
+              title: trackTitle,
+              author: trackAuthor,
               url: res.link
             }
           ],
@@ -486,22 +525,33 @@ var __SkycScraperEngine = (() => {
     } catch (err) {
       console.warn("[Skyc Scraper] SpotifyDown failed, trying fallback:", err);
     }
-    const trackIdMatch = url.match(/track\/([a-zA-Z0-9]+)/i);
-    if (trackIdMatch) {
+    if (trackId) {
       return {
         platform: "spotify",
-        title: "Spotify Track",
-        author: "Spotify Artist",
-        thumbnail: "",
+        title,
+        author,
+        thumbnail,
         duration: 0,
         formats: [
           {
+            id: "spotify_flac_lossless",
+            label: `Lossless FLAC \u2022 ${title} \u2014 ${author}`,
+            quality: "Lossless FLAC",
+            type: "audio",
+            ext: "flac",
+            title,
+            author,
+            url: `spotiflac_resolve:${trackId}`
+          },
+          {
             id: "spot_audio",
-            label: "Spotify Audio (MP3)",
+            label: `Spotify Audio MP3 \u2022 ${title} \u2014 ${author}`,
             quality: "320kbps",
             type: "audio",
             ext: "mp3",
-            url: `spotidown_resolve:${trackIdMatch[1]}`
+            title,
+            author,
+            url: `spotidown_resolve:${trackId}`
           }
         ],
         photos: [],
@@ -1357,7 +1407,8 @@ var __SkycScraperEngine = (() => {
   return __toCommonJS(index_exports);
 })();
 
-if (typeof module !== 'undefined' && module.exports) { module.exports = __SkycScraperEngine; }
-if (typeof window !== 'undefined') { window.__SkycScraperEngine = __SkycScraperEngine; }
-if (typeof globalThis !== 'undefined') { globalThis.__SkycScraperEngine = __SkycScraperEngine; }
+const __SkycScraperEngine = __ZennxScraperEngine;
+if (typeof module !== 'undefined' && module.exports) { module.exports = __ZennxScraperEngine; }
+if (typeof window !== 'undefined') { window.__ZennxScraperEngine = __ZennxScraperEngine; window.__SkycScraperEngine = __ZennxScraperEngine; }
+if (typeof globalThis !== 'undefined') { globalThis.__ZennxScraperEngine = __ZennxScraperEngine; globalThis.__SkycScraperEngine = __ZennxScraperEngine; }
 

@@ -1,108 +1,148 @@
-/* public/css/variables.css — Studio-Grade Claude & 21st.dev Design Tokens */
+/* public/css/variables.css — Authentic Mori Design System & Tokens */
+
 :root,
 [data-theme="light"] {
-  /* Warm Parchment & Alabaster Surfaces */
-  --bg-primary: #F4F3EE;
-  --bg-surface: #FAF9F5;
-  --bg-elevated: #ECEAE2;
-  --bg-glass: rgba(250, 249, 245, 0.88);
-  --bg-input: #FFFFFF;
+  /* Mori Warm Paper & Linen Palette */
+  --bg-color: #fffbf2;
+  --bg-rgb: 255, 251, 242;
+  --surface: #f7f3e9;
+  --surface-rgb: 247, 243, 233;
+  --primary: #1a1917;
+  --primary-rgb: 26, 25, 23;
+  --on-primary: #fffbf2;
+  --text-main: #1a1917;
+  --text-secondary: #6e6a64;
 
-  /* Typography & Text Contrast */
-  --text-primary: #141413;
-  --text-secondary: #5E5D59;
-  --text-muted: #8C8A84;
-  --text-inverse: #FAF9F5;
+  /* Aliases for semantic interoperability */
+  --bg-primary: var(--bg-color);
+  --bg-surface: var(--surface);
+  --bg-elevated: var(--surface);
+  --bg-glass: rgba(247, 243, 233, 0.92);
+  --bg-input: var(--surface);
 
-  /* Terracotta Core Accent */
-  --accent-primary: #D97757;
-  --accent-hover: #C6613F;
-  --accent-subtle: rgba(217, 119, 87, 0.12);
-  --accent-border: rgba(217, 119, 87, 0.35);
+  --text-primary: var(--text-main);
+  --text-muted: var(--text-secondary);
+  --text-inverse: var(--on-primary);
 
-  /* Google Gemini Sparkle Accent */
-  --gemini-cobalt: #2E5B88;
-  --gemini-sparkle: #4285F4;
-  --gemini-subtle: rgba(46, 91, 136, 0.1);
+  /* Mori High-Contrast Accents */
+  --accent-primary: #1a1917;
+  --accent-hover: #333330;
+  --accent-subtle: rgba(26, 25, 23, 0.08);
+  --accent-border: #1a1917;
+  --brand-terracotta: #D97757;
+  --brand-terracotta-bg: rgba(217, 119, 87, 0.12);
 
-  /* Borders & Shadows */
-  --border-subtle: #E5E3DA;
-  --border-strong: #D1CEBF;
-  --border-focus: #D97757;
-  --shadow-card: 0 4px 20px -4px rgba(20, 20, 19, 0.06), 0 1px 3px rgba(20, 20, 19, 0.04);
-  --shadow-floating: 0 16px 40px -10px rgba(20, 20, 19, 0.14), 0 0 0 1px rgba(20, 20, 19, 0.05);
-  --shadow-glow: 0 0 24px rgba(217, 119, 87, 0.18);
-  --shadow-specular: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 12px 32px -8px rgba(0, 0, 0, 0.08);
+  /* Clean Mori Neo-Brutalist Hairline Borders & Offset Shadows */
+  --border-subtle: rgba(26, 25, 23, 0.18);
+  --border-strong: var(--primary);
+  --border-focus: var(--primary);
 
-  /* Semantic Status Colors */
-  --status-success: #2E6F40;
-  --status-success-bg: rgba(46, 111, 64, 0.12);
-  --status-warning: #B86B14;
-  --status-warning-bg: rgba(184, 107, 20, 0.12);
-  --status-danger: #C93B2B;
-  --status-danger-bg: rgba(201, 59, 43, 0.12);
+  --shadow-card: 2px 2px 0px var(--primary);
+  --shadow-drop: 4px 4px 0px var(--primary);
+  --shadow-floating: 4px 4px 0px var(--primary);
+  --shadow-modal: 8px 8px 0px var(--primary);
+  --shadow-glow: none;
+
+  /* Status Colors */
+  --status-success: #1E6B37;
+  --status-success-bg: rgba(30, 107, 55, 0.12);
+  --status-warning: #B35C00;
+  --status-warning-bg: rgba(179, 92, 0, 0.12);
+  --status-danger: #C02B2B;
+  --status-danger-bg: rgba(192, 43, 43, 0.12);
 
   /* Typography Scales */
-  --font-serif: 'Instrument Serif', 'Newsreader', Georgia, Cambria, serif;
-  --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, monospace;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Space Mono", "JetBrains Mono", monospace;
+  --font-display: "Outfit", "Inter", sans-serif;
 
-  /* Rounded Corner Radii */
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  /* UI Radii */
+  --radius-s: 3px;
+  --radius-l: 6px;
+  --radius-xl: 10px;
   --radius-pill: 9999px;
 
-  /* Transitions & Spring Motion */
-  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-  --duration-fast: 150ms;
-  --duration-normal: 250ms;
-  --duration-slow: 450ms;
+  /* Motion & Glassmorphism */
+  --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --anim-duration: 0.2s;
+  --anim-scale: 1;
+  --glass-blur: 8px;
+  --glass-bg-opacity: 0.92;
 }
 
 [data-theme="dark"] {
-  /* Deep Claude Obsidian & Charcoal Surfaces */
-  --bg-primary: #0C0C0B;
-  --bg-surface: #141413;
-  --bg-elevated: #1C1B19;
-  --bg-glass: rgba(20, 20, 19, 0.86);
-  --bg-input: #121211;
+  /* Mori Deep Obsidian Palette */
+  --bg-color: #141416;
+  --bg-rgb: 20, 20, 22;
+  --surface: #1e1e22;
+  --surface-rgb: 30, 30, 34;
+  --primary: #f8f8fa;
+  --primary-rgb: 248, 248, 250;
+  --on-primary: #141416;
+  --text-main: #f8f8fa;
+  --text-secondary: #94949e;
 
-  /* Typography Mode Gelap */
-  --text-primary: #FAF9F5;
-  --text-secondary: #B4B2A9;
-  --text-muted: #76746D;
-  --text-inverse: #0C0C0B;
+  /* Aliases */
+  --bg-primary: var(--bg-color);
+  --bg-surface: var(--surface);
+  --bg-elevated: var(--surface);
+  --bg-glass: rgba(30, 30, 34, 0.88);
+  --bg-input: var(--surface);
 
-  /* Terracotta Core Accent */
-  --accent-primary: #D97757;
-  --accent-hover: #E3886B;
-  --accent-subtle: rgba(217, 119, 87, 0.18);
-  --accent-border: rgba(217, 119, 87, 0.45);
+  --text-primary: var(--text-main);
+  --text-muted: var(--text-secondary);
+  --text-inverse: var(--on-primary);
 
-  /* Google Gemini Sparkle Accent */
-  --gemini-cobalt: #4285F4;
-  --gemini-sparkle: #A8C7FA;
-  --gemini-subtle: rgba(66, 133, 244, 0.15);
+  /* Accents */
+  --accent-primary: #f8f8fa;
+  --accent-hover: #e2e2e6;
+  --accent-subtle: rgba(248, 248, 250, 0.12);
+  --accent-border: #f8f8fa;
+  --brand-terracotta: #D97757;
+  --brand-terracotta-bg: rgba(217, 119, 87, 0.2);
 
-  /* Hairline Specular Borders & Deep Elevation */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --border-focus: #D97757;
-  --shadow-card: 0 8px 24px -6px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
-  --shadow-floating: 0 20px 48px -10px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
-  --shadow-glow: 0 0 30px rgba(217, 119, 87, 0.28);
-  --shadow-specular: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 24px 50px -12px rgba(0, 0, 0, 0.7);
+  /* Borders & Shadows */
+  --border-subtle: rgba(248, 248, 250, 0.2);
+  --border-strong: var(--primary);
+  --border-focus: var(--primary);
 
-  /* Status Semantik Mode Gelap */
+  --shadow-card: 2px 2px 0px rgba(0, 0, 0, 0.4);
+  --shadow-drop: 4px 4px 0px rgba(0, 0, 0, 0.6);
+  --shadow-floating: 4px 4px 0px rgba(0, 0, 0, 0.7);
+  --shadow-modal: 8px 8px 0px rgba(0, 0, 0, 0.9);
+  --shadow-glow: none;
+
+  /* Status Colors Dark */
   --status-success: #4CAE6A;
-  --status-success-bg: rgba(76, 174, 106, 0.16);
+  --status-success-bg: rgba(76, 174, 106, 0.18);
   --status-warning: #E09638;
-  --status-warning-bg: rgba(224, 150, 56, 0.16);
+  --status-warning-bg: rgba(224, 150, 56, 0.18);
   --status-danger: #E25D4E;
-  --status-danger-bg: rgba(226, 93, 78, 0.16);
+  --status-danger-bg: rgba(226, 93, 78, 0.18);
+}
+
+/* Mori Corner Presets */
+body.corner-sharp {
+  --radius-l: 3px;
+  --radius-xl: 4px;
+}
+body.corner-modern {
+  --radius-l: 6px;
+  --radius-xl: 10px;
+}
+body.corner-round {
+  --radius-l: 16px;
+  --radius-xl: 24px;
+}
+
+/* Mori Animation Presets */
+body.anim-off * {
+  transition: none !important;
+  animation: none !important;
+}
+body.anim-slow * {
+  transition-duration: 0.45s !important;
+}
+body.anim-fast * {
+  transition-duration: 0.1s !important;
 }

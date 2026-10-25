@@ -1,37 +1,37 @@
-# @elskyx/skyc
+# @elskyx/zennx
 
-Universal client-side media downloader CLI with a Claude-inspired aesthetic. Save watermark-free videos, music, and photos from 16+ platforms.
+Universal client-side media downloader CLI with Mori-inspired aesthetic. Save watermark-free videos, lossless FLAC & MP3 music, and photos from 16+ platforms.
 
 ## Installation
 
 Run directly with `npx`:
 ```bash
-npx @elskyx/skyc
+npx @elskyx/zennx
 ```
 
 Or install globally:
 ```bash
-npm install -g @elskyx/skyc
-skyc
+npm install -g @elskyx/zennx
+zennx
 ```
 
 ## Usage
 
 ```bash
 # Interactive REPL
-skyc
+zennx
 
 # Direct URL download
-skyc https://www.tiktok.com/@user/video/123456789
+zennx https://www.tiktok.com/@user/video/123456789
 
-# Extract MP3 Audio Only
-skyc https://youtu.be/dQw4w9WgXcQ -a
+# Extract MP3 / FLAC Audio Only
+zennx https://youtu.be/dQw4w9WgXcQ -a
 
 # Compile Photo Album into PDF
-skyc https://www.tiktok.com/@user/video/123456789 -p
+zennx https://www.tiktok.com/@user/video/123456789 -p
 
 # Pick best format automatically
-skyc <URL> -y
+zennx <URL> -y
 ```
 
 ## Supported Platforms

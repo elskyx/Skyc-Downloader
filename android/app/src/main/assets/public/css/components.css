@@ -1,4 +1,4 @@
-/* public/css/components.css */
+/* public/css/components.css — Mori Neo-Brutalist Reusable Components */
 
 /* Buttons */
 .btn {
@@ -7,100 +7,106 @@
   justify-content: center;
   gap: 0.5rem;
   font-family: var(--font-sans);
-  font-size: 0.92rem;
-  font-weight: 500;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
   padding: 0.65rem 1.25rem;
-  border-radius: var(--radius-md);
-  border: 1px solid transparent;
+  border-radius: var(--radius-l);
+  border: 1.5px solid var(--primary);
   cursor: pointer;
   user-select: none;
-  transition: all var(--duration-fast) var(--ease-smooth);
+  transition: var(--transition);
   text-decoration: none;
   line-height: 1.2;
 }
 
 .btn:active {
-  transform: scale(0.98);
+  transform: translateY(0);
+  box-shadow: 1px 1px 0px var(--primary);
 }
 
 .btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none !important;
+  box-shadow: none !important;
 }
 
 .btn-primary {
-  background-color: var(--accent-primary);
-  color: #FAF9F5;
-  border-color: transparent;
-  font-weight: 600;
-  box-shadow: 0 2px 8px rgba(217, 119, 87, 0.22);
+  background-color: var(--primary);
+  color: var(--on-primary);
+  box-shadow: 2px 2px 0px var(--primary);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: var(--accent-hover);
-  box-shadow: 0 4px 12px rgba(217, 119, 87, 0.32);
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px var(--primary);
 }
 
 .btn-secondary {
-  background-color: var(--bg-elevated);
-  color: var(--text-primary);
-  border-color: var(--border-subtle);
+  background-color: var(--surface);
+  color: var(--text-main);
+  box-shadow: 2px 2px 0px var(--primary);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background-color: var(--bg-surface);
-  border-color: var(--border-strong);
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px var(--primary);
 }
 
 .btn-ghost {
   background: transparent;
-  color: var(--text-secondary);
+  color: var(--text-main);
+  border-color: transparent;
 }
 
 .btn-ghost:hover:not(:disabled) {
-  background-color: var(--bg-elevated);
-  color: var(--text-primary);
+  background-color: var(--surface);
+  border-color: var(--primary);
 }
 
 .btn-icon {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   padding: 0;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-l);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
-  border: 1px solid transparent;
-  color: var(--text-secondary);
+  background: var(--surface);
+  border: 1.5px solid var(--primary);
+  color: var(--text-main);
   cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-smooth);
+  transition: var(--transition);
 }
 
 .btn-icon:hover {
-  background-color: var(--bg-elevated);
-  color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 0px var(--primary);
 }
 
 .btn-icon.active {
-  background-color: var(--accent-subtle);
-  color: var(--accent-primary);
+  background-color: var(--primary);
+  color: var(--on-primary);
 }
 
-/* Claude Card */
-.claude-card {
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
+/* Mori Cards */
+.claude-card,
+.media-card,
+.mori-card {
+  background-color: var(--surface);
+  border: 1.5px solid var(--primary);
+  border-radius: var(--radius-xl);
   padding: 1.25rem;
-  box-shadow: var(--shadow-card);
-  transition: border-color var(--duration-fast) var(--ease-smooth),
-              box-shadow var(--duration-fast) var(--ease-smooth);
+  box-shadow: 4px 4px 0px var(--primary);
+  transition: var(--transition);
 }
 
-.claude-card:hover {
-  border-color: var(--border-strong);
+.claude-card:hover,
+.media-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 5px 5px 0px var(--primary);
 }
 
 /* Badges & Chips */
@@ -109,29 +115,37 @@
   align-items: center;
   gap: 0.35rem;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  padding: 0.2rem 0.55rem;
-  border-radius: var(--radius-pill);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.25rem 0.55rem;
+  border-radius: var(--radius-s);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
+  border: 1px solid var(--primary);
 }
 
 .badge-terracotta {
-  background-color: var(--accent-subtle);
-  color: var(--accent-primary);
-  border: 1px solid var(--accent-border);
+  background-color: var(--brand-terracotta-bg);
+  color: var(--brand-terracotta);
+  border-color: var(--brand-terracotta);
 }
 
 .badge-neutral {
-  background-color: var(--bg-elevated);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-subtle);
+  background-color: var(--surface);
+  color: var(--text-main);
+  border-color: var(--primary);
 }
 
 .badge-success {
   background-color: var(--status-success-bg);
   color: var(--status-success);
+  border-color: var(--status-success);
+}
+
+.badge-cobalt {
+  background-color: var(--accent-subtle);
+  color: var(--primary);
+  border-color: var(--primary);
 }
 
 .chip-filter {
@@ -139,77 +153,83 @@
   align-items: center;
   gap: 0.45rem;
   padding: 0.45rem 0.9rem;
-  border-radius: var(--radius-pill);
-  background-color: var(--bg-elevated);
-  color: var(--text-secondary);
+  border-radius: var(--radius-l);
+  background-color: var(--bg-color);
+  color: var(--text-main);
   font-family: var(--font-sans);
   font-size: 0.84rem;
-  font-weight: 500;
-  border: 1px solid var(--border-subtle);
+  font-weight: 600;
+  border: 1px solid var(--primary);
   cursor: pointer;
   user-select: none;
-  transition: all var(--duration-fast) var(--ease-smooth);
+  transition: var(--transition);
 }
 
 .chip-filter:hover {
-  color: var(--text-primary);
-  background-color: var(--bg-surface);
+  background-color: var(--surface);
+  box-shadow: 2px 2px 0px var(--primary);
+  transform: translateY(-1px);
 }
 
 .chip-filter.active {
-  background-color: var(--accent-primary);
-  color: #FAF9F5;
-  border-color: var(--accent-primary);
+  background-color: var(--primary);
+  color: var(--on-primary);
+  box-shadow: 2px 2px 0px var(--primary);
 }
 
 /* Floating Download Bubble Widget */
 .floating-download-widget {
   position: fixed;
-  bottom: 5.5rem;
-  right: 1.5rem;
-  z-index: 60;
+  bottom: calc(75px + env(safe-area-inset-bottom, 0px));
+  right: max(16px, calc((100vw - 540px) / 2 + 16px));
+  z-index: 1050;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
 
 .bubble-trigger-btn {
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-pill);
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-floating);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--surface);
+  border: 1.5px solid var(--primary);
+  box-shadow: 2px 2px 0px var(--primary);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   position: relative;
-  transition: transform var(--duration-fast) var(--ease-spring),
-              box-shadow var(--duration-fast) var(--ease-smooth);
+  transition: var(--transition);
 }
 
 .bubble-trigger-btn:hover {
   transform: scale(1.06);
+  box-shadow: 3px 3px 0px var(--primary);
+}
+
+.bubble-trigger-btn:active {
+  transform: scale(0.96);
+  box-shadow: 1px 1px 0px var(--primary);
 }
 
 .bubble-progress-svg {
   position: absolute;
   top: 0;
   left: 0;
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
   transform: rotate(-90deg);
 }
 
 .bubble-progress-track {
-  stroke: var(--bg-elevated);
+  stroke: var(--bg-color);
   stroke-width: 3.5;
   fill: none;
 }
 
 .bubble-progress-bar {
-  stroke: var(--accent-primary);
+  stroke: var(--brand-terracotta);
   stroke-width: 3.5;
   fill: none;
   stroke-linecap: round;
@@ -217,7 +237,7 @@
 }
 
 .bubble-inner-icon {
-  color: var(--accent-primary);
+  color: var(--primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -227,18 +247,18 @@
   position: absolute;
   top: -4px;
   right: -4px;
-  background-color: var(--accent-primary);
-  color: #FAF9F5;
+  background-color: var(--primary);
+  color: var(--on-primary);
   font-family: var(--font-mono);
   font-size: 0.65rem;
   font-weight: 700;
-  width: 19px;
-  height: 19px;
-  border-radius: var(--radius-pill);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--bg-primary);
+  border: 1.5px solid var(--bg-color);
 }
 
 /* Expandable Dropup Tray */
@@ -246,16 +266,16 @@
   display: none;
   width: 320px;
   max-height: 420px;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-floating);
+  background-color: var(--surface);
+  border: 1.5px solid var(--primary);
+  border-radius: var(--radius-xl);
+  box-shadow: 6px 6px 0px var(--primary);
   margin-bottom: 0.75rem;
   padding: 1rem;
   flex-direction: column;
   gap: 0.75rem;
   overflow-y: auto;
-  animation: traySlideUp 0.22s var(--ease-spring);
+  animation: traySlideUp 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .bubble-dropup-tray.open {
@@ -277,14 +297,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--primary);
   padding-bottom: 0.65rem;
 }
 
 .tray-title {
   font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--primary);
 }
 
 .tray-tasks-list {
@@ -294,8 +316,9 @@
 }
 
 .tray-task-item {
-  background-color: var(--bg-elevated);
-  border-radius: var(--radius-md);
+  background-color: var(--bg-color);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-l);
   padding: 0.65rem;
   display: flex;
   flex-direction: column;
@@ -311,8 +334,8 @@
 
 .tray-task-name {
   font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--text-primary);
+  font-weight: 600;
+  color: var(--text-main);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -329,7 +352,8 @@
 .progress-bar-container {
   width: 100%;
   height: 6px;
-  background-color: var(--bg-primary);
+  background-color: var(--bg-color);
+  border: 1px solid var(--primary);
   border-radius: var(--radius-pill);
   overflow: hidden;
   position: relative;
@@ -337,19 +361,20 @@
 
 .progress-bar-fill {
   height: 100%;
-  background-color: var(--accent-primary);
+  background-color: var(--primary);
   border-radius: var(--radius-pill);
   width: 0%;
   transition: width 0.2s ease;
 }
 
-/* Toast Notification */
-.toast-container {
+/* Toast Notification (Mori Signature Toast) */
+.toast-container,
+.custom-toast {
   position: fixed;
-  top: 1.5rem;
+  bottom: calc(85px + env(safe-area-inset-bottom, 0px));
   left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
+  transform: translateX(-50%) translateY(0);
+  z-index: 9999;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -360,22 +385,23 @@
   pointer-events: auto;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.6rem;
-  background-color: var(--bg-surface);
-  color: var(--text-primary);
-  border: 1px solid var(--border-subtle);
-  padding: 0.75rem 1.25rem;
-  border-radius: var(--radius-pill);
-  box-shadow: var(--shadow-floating);
+  background-color: var(--surface);
+  color: var(--text-main);
+  border: 1.5px solid var(--primary);
+  padding: 10px 22px;
+  border-radius: var(--radius-xl);
+  box-shadow: 4px 4px 0px var(--primary);
   font-size: 0.88rem;
-  font-weight: 500;
-  animation: toastPop 0.25s var(--ease-spring);
+  font-weight: 700;
+  animation: toastPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes toastPop {
   from {
     opacity: 0;
-    transform: translateY(-10px) scale(0.95);
+    transform: translateY(12px) scale(0.95);
   }
   to {
     opacity: 1;
@@ -383,19 +409,8 @@
   }
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Studio-Grade Keyboard Accessibility & Focus Rings (WCAG 2.4.7)
-   ───────────────────────────────────────────────────────────── */
+/* Focus Accessibility */
 :focus-visible {
-  outline: 2px solid var(--accent-primary) !important;
-  outline-offset: 2px !important;
-}
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible {
-  outline: 2px solid var(--accent-primary) !important;
+  outline: 2px solid var(--primary) !important;
   outline-offset: 2px !important;
 }

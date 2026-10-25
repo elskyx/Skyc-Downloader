@@ -100,41 +100,23 @@
 
 .claude-url-composer {
   position: relative;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
+  background-color: var(--surface);
+  border: 1.5px solid var(--primary);
   border-radius: var(--radius-xl);
   padding: 1.15rem 1.35rem;
-  box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: 2px 2px 0px var(--primary);
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
-  transition: border-color var(--duration-fast) var(--ease-smooth),
-              box-shadow var(--duration-fast) var(--ease-smooth),
-              transform 0.15s ease-out;
+  transition: var(--transition);
   will-change: transform;
   overflow: hidden;
 }
 
-/* Specular Mouse Spotlight Effect (21st.dev Spotlight) */
-.claude-url-composer::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(217, 119, 87, 0.1), transparent 75%);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 0;
-}
-
-.claude-url-composer:hover::before {
-  opacity: 1;
-}
-
+/* Mori High-Contrast Focus Shadow */
 .claude-url-composer:focus-within {
-  border-color: rgba(217, 119, 87, 0.55);
-  box-shadow: 0 0 0 3px rgba(217, 119, 87, 0.18), var(--shadow-floating);
+  border-color: var(--primary);
+  box-shadow: 4px 4px 0px var(--primary);
 }
 
 .composer-input-row {
@@ -201,23 +183,22 @@
   gap: 0.38rem;
   padding: 0.5rem 0.95rem;
   min-height: 38px;
-  border-radius: var(--radius-pill);
-  background-color: var(--bg-elevated);
-  border: 1px solid var(--border-subtle);
-  color: var(--text-secondary);
+  border-radius: var(--radius-l);
+  background-color: var(--bg-color);
+  border: 1px solid var(--primary);
+  color: var(--text-main);
   font-family: var(--font-sans);
   font-size: 0.84rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   touch-action: manipulation;
-  transition: all var(--duration-fast) var(--ease-spring);
+  transition: var(--transition);
   user-select: none;
 }
 
 .tool-chip-btn:hover {
-  color: var(--text-primary);
-  background-color: var(--bg-surface);
-  border-color: var(--border-strong);
+  background-color: var(--surface);
+  box-shadow: 2px 2px 0px var(--primary);
   transform: translateY(-1px);
 }
 
@@ -226,57 +207,51 @@
 }
 
 .tool-chip-btn.active {
-  background-color: var(--accent-subtle);
-  border-color: var(--accent-primary);
-  color: var(--accent-primary);
-  font-weight: 600;
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+  box-shadow: 2px 2px 0px var(--primary);
 }
 
-/* Master Analyze Submit Button with Tactile Spring & Sheen */
-.composer-submit-btn {
+/* Master Analyze Submit Button with Mori Neo-Brutalist High-Contrast Styling */
+.composer-submit-btn,
+#downloadBtn {
   position: relative;
-  background: linear-gradient(135deg, #E28466 0%, #D97757 60%, #C55B39 100%);
-  color: #FAF9F5;
-  border: none;
-  border-radius: var(--radius-pill);
-  padding: 0.65rem 1.45rem;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border: 1.5px solid var(--primary);
+  border-radius: var(--radius-xl);
+  padding: 0.75rem 1.65rem;
   font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.92rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  box-shadow: 0 4px 14px rgba(217, 119, 87, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-  transition: all var(--duration-fast) var(--ease-spring);
+  box-shadow: 2px 2px 0px var(--primary);
+  transition: var(--transition);
   overflow: hidden;
   user-select: none;
 }
 
-.composer-submit-btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.65s ease;
+.composer-submit-btn:hover:not(:disabled),
+#downloadBtn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px var(--primary);
 }
 
-.composer-submit-btn:hover:not(:disabled)::after {
-  transform: translateX(100%);
+.composer-submit-btn:active:not(:disabled),
+#downloadBtn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 1px 1px 0px var(--primary);
 }
 
-.composer-submit-btn:hover:not(:disabled) {
-  transform: translateY(-1.5px) scale(1.02);
-  box-shadow: 0 6px 20px rgba(217, 119, 87, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.35);
-}
-
-.composer-submit-btn:active:not(:disabled) {
-  transform: translateY(0) scale(0.99);
-}
-
-.composer-submit-btn:disabled {
-  opacity: 0.72;
+.composer-submit-btn:disabled,
+#downloadBtn:disabled {
+  opacity: 0.6;
   cursor: not-allowed;
   transform: none !important;
   box-shadow: none !important;
@@ -739,19 +714,37 @@
 
 .media-preview-box {
   position: relative;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-l);
   overflow: hidden;
-  background-color: var(--bg-elevated);
+  background-color: var(--surface);
   margin-bottom: 1.15rem;
-  border: 1px solid var(--border-subtle);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1.5px solid var(--primary);
+  box-shadow: 2px 2px 0px var(--primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.media-preview-box::before {
+  content: "ZENNX";
+  position: absolute;
+  font-weight: 800;
+  letter-spacing: 10px;
+  opacity: 0.12;
+  font-size: 2.2rem;
+  color: var(--primary);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .media-thumb-img {
   width: 100%;
   max-height: 400px;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
+  position: relative;
+  z-index: 2;
   transition: transform var(--duration-normal) var(--ease-smooth);
 }
 
@@ -795,24 +788,30 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.8rem 1rem;
-  border-radius: var(--radius-md);
-  background-color: var(--bg-elevated);
-  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-l);
+  background-color: var(--bg-color);
+  border: 1px solid var(--primary);
   cursor: pointer;
-  transition: all var(--duration-fast) var(--ease-spring);
+  transition: var(--transition);
 }
 
 .format-option-card:hover {
-  border-color: var(--accent-primary);
-  background-color: var(--bg-surface);
+  background-color: var(--surface);
   transform: translateY(-1.5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 2px 2px 0px var(--primary);
 }
 
 .format-option-card.selected {
-  border-color: var(--accent-primary);
-  background-color: var(--accent-subtle);
-  box-shadow: 0 0 0 1px var(--accent-primary);
+  border: 1.5px solid var(--primary);
+  background-color: var(--primary);
+  color: var(--on-primary);
+  box-shadow: 2px 2px 0px var(--primary);
+}
+
+.format-option-card.selected .format-quality-label,
+.format-option-card.selected .format-type-label,
+.format-option-card.selected .format-size-label {
+  color: var(--on-primary);
 }
 
 .format-info-left {

@@ -101,7 +101,7 @@ async fn save_media_file(filename: String, subfolder: String, bytes: Vec<u8>) ->
         } else {
             dirs::video_dir().unwrap_or_else(|| dirs::download_dir().unwrap_or_default())
         };
-        base_dir.join("Skyc")
+        base_dir.join("Zennx")
     };
 
     fs::create_dir_all(&target_dir).map_err(|e| e.to_string())?;
@@ -143,7 +143,7 @@ async fn download_media_stream(
         } else {
             dirs::video_dir().unwrap_or_else(|| dirs::download_dir().unwrap_or_default())
         };
-        base_dir.join("Skyc")
+        base_dir.join("Zennx")
     };
 
     fs::create_dir_all(&target_dir).map_err(|e| e.to_string())?;
@@ -186,21 +186,25 @@ async fn download_media_stream(
                 let pct = ((downloaded_bytes as f64 / total as f64) * 100.0).min(100.0) as u8;
                 if pct != last_percent {
                     last_percent = pct;
-                    let _ = app.emit("skyc://download-progress", DownloadProgressPayload {
+                    let payload = DownloadProgressPayload {
                         filename: filename.clone(),
                         downloaded: downloaded_bytes,
                         total: Some(total),
                         percent: pct,
-                    });
+                    };
+                    let _ = app.emit("zennx://download-progress", payload.clone());
+                    let _ = app.emit("skyc://download-progress", payload);
                 }
             }
         } else {
-            let _ = app.emit("skyc://download-progress", DownloadProgressPayload {
+            let payload = DownloadProgressPayload {
                 filename: filename.clone(),
                 downloaded: downloaded_bytes,
                 total: None,
                 percent: 0,
-            });
+            };
+            let _ = app.emit("zennx://download-progress", payload.clone());
+            let _ = app.emit("skyc://download-progress", payload);
         }
     }
 
@@ -229,5 +233,5 @@ pub fn run() {
             open_in_explorer
         ])
         .run(tauri::generate_context!())
-        .expect("Error while running Skyc desktop application");
+        .expect("Error while running Zennx desktop application");
 }

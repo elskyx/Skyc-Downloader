@@ -1662,7 +1662,7 @@ export default function SculptureHero(props: SculptureHeroProps) {
 
       {showNav && (
         <nav ref={navRef} className="sh-nav" aria-label="Primary">
-          <a className="sh-brand" href="#">
+          <a className="sh-brand" href="/" aria-label={`${brand} Home`}>
             {brand}
           </a>
           <ul className="sh-links">

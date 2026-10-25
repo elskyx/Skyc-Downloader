@@ -48,7 +48,7 @@ server.listen(4892, async () => {
 
     const snapshots = [
       {
-        name: 'skyc-home-dark.png',
+        base: 'home-dark',
         setup: async () => {
           await page.goto('http://localhost:4892');
           await page.evaluate(() => {
@@ -59,7 +59,7 @@ server.listen(4892, async () => {
         }
       },
       {
-        name: 'skyc-home-light.png',
+        base: 'home-light',
         setup: async () => {
           await page.evaluate(() => {
             document.documentElement.setAttribute('data-theme', 'light');
@@ -69,7 +69,7 @@ server.listen(4892, async () => {
         }
       },
       {
-        name: 'skyc-batch.png',
+        base: 'batch',
         setup: async () => {
           await page.evaluate(() => {
             document.documentElement.setAttribute('data-theme', 'dark');
@@ -80,7 +80,7 @@ server.listen(4892, async () => {
         }
       },
       {
-        name: 'skyc-platforms.png',
+        base: 'platforms',
         setup: async () => {
           await page.evaluate(() => {
             document.documentElement.setAttribute('data-theme', 'dark');
@@ -91,7 +91,7 @@ server.listen(4892, async () => {
         }
       },
       {
-        name: 'skyc-settings.png',
+        base: 'settings',
         setup: async () => {
           await page.evaluate(() => {
             document.documentElement.setAttribute('data-theme', 'dark');
@@ -102,7 +102,7 @@ server.listen(4892, async () => {
         }
       },
       {
-        name: 'skyc-downloads.png',
+        base: 'downloads',
         setup: async () => {
           await page.evaluate(() => {
             document.documentElement.setAttribute('data-theme', 'dark');
@@ -116,18 +116,28 @@ server.listen(4892, async () => {
 
     for (const snap of snapshots) {
       await snap.setup();
-      await page.waitForTimeout(500);
-      const newName = snap.name.replace(/^skyc-/, 'skyc-downloader-');
-      const out1New = path.join(aboutDir, newName);
-      const out1Old = path.join(aboutDir, snap.name);
-      const out2New = path.join(landingDir, newName);
-      const out2Old = path.join(landingDir, snap.name);
+      await page.waitForTimeout(600);
 
-      await page.screenshot({ path: out1New });
-      fs.copyFileSync(out1New, out1Old);
-      fs.copyFileSync(out1New, out2New);
-      fs.copyFileSync(out1New, out2Old);
-      console.log(`Saved snapshot: ${newName} & ${snap.name}`);
+      const zennxFull = `zennx-downloader-${snap.base}.png`;
+      const zennxShort = `zennx-${snap.base}.png`;
+      const skycFull = `skyc-downloader-${snap.base}.png`;
+      const skycShort = `skyc-${snap.base}.png`;
+
+      const primaryPath = path.join(landingDir, zennxFull);
+      await page.screenshot({ path: primaryPath });
+
+      // Mirror to landingDir
+      fs.copyFileSync(primaryPath, path.join(landingDir, zennxShort));
+      fs.copyFileSync(primaryPath, path.join(landingDir, skycFull));
+      fs.copyFileSync(primaryPath, path.join(landingDir, skycShort));
+
+      // Mirror to aboutDir
+      fs.copyFileSync(primaryPath, path.join(aboutDir, zennxFull));
+      fs.copyFileSync(primaryPath, path.join(aboutDir, zennxShort));
+      fs.copyFileSync(primaryPath, path.join(aboutDir, skycFull));
+      fs.copyFileSync(primaryPath, path.join(aboutDir, skycShort));
+
+      console.log(`Saved snapshot: ${zennxFull} (with zennx/skyc mirrors)`);
     }
 
     await browser.close();

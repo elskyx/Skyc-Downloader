@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
 
 async function build() {
-  console.log("⚡ Compiling Skyc Scrapers...");
+  console.log("⚡ Compiling Zennx Scrapers...");
 
   const outPublic = path.join(rootDir, "public", "js", "scrapers", "bundle.js");
   const outCli = path.join(rootDir, "cli", "bundle.js");
@@ -26,13 +26,13 @@ async function build() {
       entryPoints: [path.join(rootDir, "src-scrapers", "index.js")],
       bundle: true,
       format: "iife",
-      globalName: "__SkycScraperEngine",
+      globalName: "__ZennxScraperEngine",
       outfile: outPublic,
       minify: false,
       sourcemap: false,
       platform: "neutral",
       footer: {
-        js: "\nif (typeof module !== 'undefined' && module.exports) { module.exports = __SkycScraperEngine; }\nif (typeof window !== 'undefined') { window.__SkycScraperEngine = __SkycScraperEngine; }\nif (typeof globalThis !== 'undefined') { globalThis.__SkycScraperEngine = __SkycScraperEngine; }\n",
+        js: "\nconst __SkycScraperEngine = __ZennxScraperEngine;\nif (typeof module !== 'undefined' && module.exports) { module.exports = __ZennxScraperEngine; }\nif (typeof window !== 'undefined') { window.__ZennxScraperEngine = __ZennxScraperEngine; window.__SkycScraperEngine = __ZennxScraperEngine; }\nif (typeof globalThis !== 'undefined') { globalThis.__ZennxScraperEngine = __ZennxScraperEngine; globalThis.__SkycScraperEngine = __ZennxScraperEngine; }\n",
       },
     });
     compiledCode = fs.readFileSync(outPublic, "utf-8");
@@ -44,7 +44,7 @@ async function build() {
     const platformFiles = fs.readdirSync(platformsDir).filter((f) => f.endsWith(".js"));
 
     let combinedModules = `
-var __SkycScraperEngine = (function() {
+var __ZennxScraperEngine = (function() {
   "use strict";
 `;
 
@@ -73,11 +73,13 @@ var __SkycScraperEngine = (function() {
     extractMedia
   };
 })();
+var __SkycScraperEngine = __ZennxScraperEngine;
 if (typeof window !== "undefined") {
-  window.__SkycScraperEngine = __SkycScraperEngine;
+  window.__ZennxScraperEngine = __ZennxScraperEngine;
+  window.__SkycScraperEngine = __ZennxScraperEngine;
 }
 if (typeof module !== "undefined" && module.exports) {
-  module.exports = __SkycScraperEngine;
+  module.exports = __ZennxScraperEngine;
 }
 `;
 
